@@ -45,7 +45,7 @@
 
 Example:
 ```shell
->>> from snakypy.pick import pick
+>>> from snakypy import pick
 >>> title = 'What is your favorite programming language?'
 >>> options = ['C', 'C++', 'Java', 'Javascript', 'Python', 'Ruby']
 >>> pick(title, options)
