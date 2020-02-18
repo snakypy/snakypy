@@ -130,3 +130,7 @@ dmypy.json
 
 # Pycharm
 .idea/
+
+docs/modules.rst
+docs/snakypy.rst
+
