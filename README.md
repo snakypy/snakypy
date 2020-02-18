@@ -25,45 +25,8 @@
 </div>
 <br>
 
-`Snakypy` is a package containing "wheels" which will help the user to get around in development.
-
+`Snakypy` is a package that contains ready-made wheels, and will help the developer to take shortcuts in development.
 ## Features
-
-<details>
-    <summary>Know some features</summary>
-
-**pick**: A function of the "pick" module. This function creates a selectable menu in a practical and automatic way.
-
-*options*:
-
-- index: Default "index=False". If the position is equal to True, a tuple returns with the index of the element referring to the list.
-
-- answer: Default answer='Answer:'. Response text.
-
-- colorful: Default colorful=False. The name says it, it makes everything colorful.
-            NOTE: If you use Windows, you should leave this option colorful=False.
-
-Example:
-```shell
->>> from snakypy import pick
->>> title = 'What is your favorite programming language?'
->>> options = ['C', 'C++', 'Java', 'Javascript', 'Python', 'Ruby']
->>> pick(title, options)
-```
-
-Output:
-```
-➜ What is your favorite programming language? (Ctrl+C to Cancel)
-[1] C
-[2] C++
-[3] Java
-[4] Javascript
-[5] Python
-[6] Ruby
-➜ Answer: 5
-'python'
-```
-</details>
 
 ## Requirements
 
@@ -104,6 +67,10 @@ For the user:
 $ pip install snakypy -U --user
 ```
 
+## Documentation
+
+You can see the documentation at: https://snakypy.readthedocs.io.
+
 ## Donation
 
 If you liked my work, buy me a coffee :coffee: :smiley:
@@ -114,10 +81,11 @@ If you liked my work, buy me a coffee :coffee: :smiley:
 
 The project is available as open source under the terms of the [MIT License](https://github.com/snakypy/snakypy/blob/master/LICENSE) © William Canin
 
-## Credits/Author
+## Author
 
 * Name: William C. Canin
 * Country: Brazil - SP
 * E-Mail: william.costa.canin@gmail.com
 * GitHub: [William Canin](http://github.com/williamcanin)
 * Personal page: [William Canin](http://williamcanin.github.io)
+* In: Snakypy Organization
