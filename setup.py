@@ -52,7 +52,7 @@ url = 'https://github.com/williamcanin/snakypy'
 setup(
     name=name,
     version=__version__,
-    description='Snakypy is a package containing wheels which will help the user to get around in development.',
+    description='Snakypy is a package that contains ready-made wheels, and will help the developer to take shortcuts in development.',
     author=__author__['name'],
     author_email=__author__['email'],
     license=license,
