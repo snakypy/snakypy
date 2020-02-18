@@ -1,11 +1,10 @@
 import time
 import sys
 from snakypy.console.colorful import printer
-from snakypy.tools.ansi import CYAN_COLOR, WARNING_ALERT
+from snakypy.tools.ansicolor import CYAN_COLOR, WARNING_ALERT
 from subprocess import check_output
-from subprocess import Popen, PIPE
 from shutil import which
-from snakypy.tools.decorators import use_unix_system
+from snakypy.tools.system import use_unix_system
 
 
 # ----------------------------------------
@@ -96,23 +95,21 @@ def get_shell():
     return lst[2]
 
 
-def command_real_time(command, shell=True, universal_newlines=True):
-    """
-    Function that uses the subprocess library with Popen.
-    The function receives a command as an argument and shows
-    execution in real time.
+def dot_file_extension(filename):
+    """[summary]
+
+    Arguments:
+        filename {[type]} -- [description]
+
     Returns:
-        int - It will return either 1 or 0. Since 1 is an error
-                return at the output of the command, zero is a
-                success return.
+        [type] -- [description]
     """
+    import re
+    m = re.search(r'(?<=[^/\\]\.).*$', filename)
+    if not m:
+        return None
 
-    process = Popen(command, shell=shell, stdout=PIPE,
-                    universal_newlines=universal_newlines)
-    for line in iter(process.stdout.readline, ''):
-        print(line.rstrip())
-    r = process.poll()
-    return r
+    return m.group(0)
 
 
-__all__ = ['get_shell', 'is_tool', 'loading', 'command_real_time']
+__all__ = ['get_shell', 'is_tool', 'loading', 'dot_file_extension']

@@ -1,7 +1,7 @@
 """Tests for `snakypy` package."""
 import pytest
 import snakypy
-from snakypy.utilities import cleaner, command_real_time
+from snakypy.utilities import cleaner
 from os import makedirs
 from os.path import join
 from contextlib import suppress
@@ -26,47 +26,47 @@ lst_files = ['file.txt', 'file.json']
 
 def test_create_file():
     file = 'Hello!'
-    forced = snakypy.create.file(file, join(__tmpdir__, lst_files[0]), force=True)
+    forced = snakypy.file.create(file, join(__tmpdir__, lst_files[0]), force=True)
     assert forced is True
     with pytest.raises(FileExistsError):
-        assert snakypy.create.file(file, join(__tmpdir__, lst_files[0]), force=False)
+        assert snakypy.file.create(file, join(__tmpdir__, lst_files[0]), force=False)
 
 
 def test_error_extension_create_json():
     content = {"Hello": "World!"}
     with pytest.raises(Exception):
-        assert snakypy.create.json2(content, join(__tmpdir__, lst_files[0]))
+        assert snakypy.json.create(content, join(__tmpdir__, lst_files[0]))
 
 
 def test_create_json_exists():
     content = {"Hello": "World!"}
     with pytest.raises(FileExistsError):
-        assert snakypy.create.json2(content, join(__tmpdir__, lst_files[1]))
+        assert snakypy.json.create(content, join(__tmpdir__, lst_files[1]))
 
 
 def test_read_json_error():
     cleaner(__tmpdir__, lst_files[1])
     with pytest.raises(FileNotFoundError):
-        assert snakypy.read.json2(join(__tmpdir__, lst_files[1]))
+        assert snakypy.json.read(join(__tmpdir__, lst_files[1]))
 
 
 def test_create_json():
     content = {"Hello": "World!"}
-    forced = snakypy.create.json2(content, join(__tmpdir__, lst_files[1]), force=True)
+    forced = snakypy.json.create(content, join(__tmpdir__, lst_files[1]), force=True)
     assert forced is True
     with pytest.raises(Exception):
-        snakypy.create.json2(content, join(__tmpdir__, lst_files[1]))
+        snakypy.json.create(content, join(__tmpdir__, lst_files[1]))
 
 
 def test_read_json():
-    data = snakypy.read.json2(join(__tmpdir__, lst_files[1]))
+    data = snakypy.json.read(join(__tmpdir__, lst_files[1]))
     assert data['Hello'] == 'World!'
 
 
 def test_update_json():
-    data = snakypy.read.json2(join(__tmpdir__, lst_files[1]))
+    data = snakypy.json.read(join(__tmpdir__, lst_files[1]))
     data['Hello'] = 'Terra!'
-    assert snakypy.update.json2(join(__tmpdir__, lst_files[1]), data) is True
+    assert snakypy.json.update(join(__tmpdir__, lst_files[1]), data) is True
 
 
 # def test_update_json_not_found():
@@ -103,7 +103,8 @@ def test_percentage():
 
 
 def test_command_real_time():
-    assert command_real_time('echo') == 0
+    from snakypy.console import cmd_verbose
+    assert cmd_verbose('echo', ret=True) == 0
 
 
 def test_imc():

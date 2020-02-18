@@ -1,6 +1,5 @@
-import snakypy.create
-import snakypy.read
-import snakypy.update
+import snakypy.file
+import snakypy.json
 import snakypy.utilities
 import snakypy.console
 import snakypy.tools

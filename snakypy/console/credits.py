@@ -1,4 +1,4 @@
-from snakypy.tools.decorators import use_unix_system
+from snakypy.tools.system import use_unix_system
 
 
 @use_unix_system
@@ -16,7 +16,7 @@ def the_credits(app_name, app_version, app_url, data: dict):
     """
 
     from datetime import date
-    from snakypy.tools.ansi import CYAN_COLOR, NONE_SCOPE_ANSI
+    from snakypy.tools.ansicolor import CYAN_COLOR, NONE_SCOPE_ANSI
 
     try:
         if type(data) is not dict:

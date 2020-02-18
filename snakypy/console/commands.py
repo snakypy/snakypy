@@ -1,4 +1,4 @@
-def command_real_time(command, shell=True, universal_newlines=True):
+def cmd_verbose(command, shell=True, universal_newlines=True, ret=False):
     """
     Function that uses the subprocess library with Popen.
     The function receives a command as an argument and shows
@@ -14,5 +14,9 @@ def command_real_time(command, shell=True, universal_newlines=True):
                     universal_newlines=universal_newlines)
     for line in iter(process.stdout.readline, ''):
         print(line.rstrip())
-    r = process.poll()
-    return r
+    if ret:
+        r = process.poll()
+        return r
+
+
+__all__ = ['cmd_verbose']

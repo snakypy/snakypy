@@ -1,5 +1,5 @@
-from snakypy.tools.decorators import use_unix_system
-from snakypy.tools.ansi import NONE_SCOPE_ANSI, WARNING_ALERT
+from snakypy.tools.system import use_unix_system
+from snakypy.tools.ansicolor import NONE_SCOPE_ANSI, WARNING_ALERT
 
 
 @use_unix_system
