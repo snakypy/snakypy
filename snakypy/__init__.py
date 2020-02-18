@@ -1,20 +1,16 @@
-from snakypy.bmi import bmi
-from snakypy.pick import pick
-from snakypy.utilities import (
-    create_file, create_json, read_json, update_json,
-    get_shell, is_tool, cmd_popen, loading, notify,
-    percentage, dot_file_extension, command_real_time,
-    cleaner, the_credits
-)
-from snakypy.decorators import (
-    use_unix_system
-)
-from snakypy.colorful import (
-    BLACK_COLOR, MAGENTA_COLOR, BLUE_COLOR, GREEN_COLOR,
-    RED_COLOR, YELLOW_COLOR, CYAN_COLOR, WHITE_COLOR,
-    WARNING_ALERT, ERROR_ALERT, FINISH_ALERT, QUESTION_ALERT,
-    NONE_SCOPE_ANSI, printer, entry
-)
+import snakypy.create
+import snakypy.read
+import snakypy.update
+import snakypy.utilities
+import snakypy.console
+import snakypy.tools
+from snakypy.utilities.bmi import bmi
+from snakypy.console import printer, pick
+from snakypy.tools import (GREEN_COLOR, BLACK_COLOR, MAGENTA_COLOR, BLUE_COLOR,
+                           RED_COLOR, YELLOW_COLOR, CYAN_COLOR, WHITE_COLOR,
+                           WARNING_ALERT, ERROR_ALERT, FINISH_ALERT, QUESTION_ALERT,
+                           NONE_SCOPE_ANSI)
+
 
 __author__ = {
     'name': 'Snakypy Org',

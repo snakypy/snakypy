@@ -130,5 +130,7 @@ dmypy.json
 
 # Pycharm
 .idea/
+
+# Ignore file docs
 docs/modules.rst
-docs/snakypy.rst
+docs/snakypy*.rst
