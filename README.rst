@@ -19,18 +19,12 @@ Snakypy
      :alt: Updates
 
 
-
-Snakypy is a package containing wheels which will help the user to get around in development.
+Snakypy is a package that contains ready-made wheels, and will help the developer to take shortcuts in development.
 
 
 * Free software: MIT license
 * Documentation: https://snakypy.readthedocs.io.
 
-
-Features
---------
-
-* TODO
 
 Credits
 -------
