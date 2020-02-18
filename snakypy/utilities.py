@@ -147,21 +147,6 @@ def is_tool(name):
     return which(name) is not None
 
 
-def cmd_popen(cmd, shell=True, bufsize=0):
-    """Method for executing commands through "subprocess.Popen".
-
-    Arguments:
-        cmd {[type]} -- [description]
-
-    Keyword Arguments:
-        shell {bool} -- [description] (default: {True})
-        bufsize {int} -- [description] (default: {0})
-    """
-    p = Popen(cmd, shell=shell, bufsize=bufsize, stdin=PIPE, stdout=PIPE, stderr=PIPE)
-    p.communicate()
-    p.stdout.close()
-
-
 def loading(set_time=0.030, bar=False, header='[Loading]', colorful=False):
     """[summary]
 
@@ -360,6 +345,6 @@ def the_credits(app_name, app_version, app_url, data: dict):
 
 
 __all__ = ['create_file', 'create_json', 'read_json', 'update_json',
-           'get_shell', 'is_tool', 'dot_file_extension', 'cmd_popen', 'loading',
+           'get_shell', 'is_tool', 'dot_file_extension', 'loading',
            'notify', 'percentage', 'command_real_time', 'cleaner',
            'the_credits']

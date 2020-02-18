@@ -2,7 +2,7 @@ from snakypy.bmi import bmi
 from snakypy.pick import pick
 from snakypy.utilities import (
     create_file, create_json, read_json, update_json,
-    get_shell, is_tool, cmd_popen, loading, notify,
+    get_shell, is_tool, loading, notify,
     percentage, dot_file_extension, command_real_time,
     cleaner, the_credits
 )
