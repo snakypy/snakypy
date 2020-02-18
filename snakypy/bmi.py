@@ -26,16 +26,16 @@ class BMI:
         return hw
 
     @staticmethod
-    def reply(result_imc, reg):
-        if result_imc < reg['V1']:
+    def reply(result_bmi, reg):
+        if result_bmi < reg['V1']:
             return 'Under weight.'
-        elif reg['V1'] <= result_imc < reg['V2']:
+        elif reg['V1'] <= result_bmi < reg['V2']:
             return 'Normal weight.'
-        elif reg['V2'] <= result_imc < reg['V3']:
+        elif reg['V2'] <= result_bmi < reg['V3']:
             return 'Marginally overweight.'
-        elif reg['V3'] <= result_imc < reg['V4']:
+        elif reg['V3'] <= result_bmi < reg['V4']:
             return 'Overweight.'
-        elif result_imc > reg['V4']:
+        elif result_bmi > reg['V4']:
             return 'Obesity.'
 
     def main(self):
