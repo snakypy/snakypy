@@ -3,7 +3,7 @@ import pytest
 from os import makedirs
 from os.path import join
 from contextlib import suppress
-from snakypy.imc import imc
+from snakypy.bmi import imc
 from snakypy.utilities import (create_file, create_json, update_json,
                                read_json, cleaner)
 

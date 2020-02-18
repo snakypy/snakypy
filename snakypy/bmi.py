@@ -1,4 +1,4 @@
-class Imc:
+class BMI:
     def __init__(self, sex, weight, height):
         self.sex = sex
         self.weight = weight
@@ -6,7 +6,7 @@ class Imc:
         self.reg_male = {'V1': 20.7, 'V2': 26.4, 'V3': 27.8, 'V4': 31.1}
         self.reg_female = {'V1': 19.1, 'V2': 25.8, 'V3': 27.3, 'V4': 32.3}
 
-    def calc_imc(self):
+    def calc_bmi(self):
         try:
             w = float(self.validate_hw(self.weight, 0, 350))
             h = float(self.validate_hw(self.height, 0, 3))
@@ -39,20 +39,20 @@ class Imc:
             return 'Obesity.'
 
     def main(self):
-        if self.calc_imc():
+        if self.calc_bmi():
             if self.validate_sex() == 'm':
-                return self.reply(self.calc_imc(), self.reg_male)
+                return self.reply(self.calc_bmi(), self.reg_male)
             elif self.validate_sex() == 'f':
-                return self.reply(self.calc_imc(), self.reg_female)
+                return self.reply(self.calc_bmi(), self.reg_female)
         return False
 
 
-def imc(sex, weight, height):
-    return Imc(sex, weight, height).main()
+def bmi(sex, weight, height):
+    return BMI(sex, weight, height).main()
 
 
-__all__ = ['imc']
+__all__ = ['bmi']
 
 if __name__ == '__main__':
-    result = imc('m', 65, 1.75)
+    result = bmi('m', 65, 1.75)
     print(result)

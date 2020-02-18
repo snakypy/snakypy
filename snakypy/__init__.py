@@ -1,4 +1,4 @@
-from snakypy.imc import imc
+from snakypy.bmi import bmi
 from snakypy.pick import pick
 from snakypy.utilities import (
     create_file, create_json, read_json, update_json,
