@@ -133,17 +133,17 @@ def test_imc():
 
 class TestBakeProject(TestCase):
 
-    @patch('snakypy.utilities.pick', return_value='python')
+    @patch('snakypy.console.pick', return_value='python')
     def test_pick_no_index(self, input):
-        from snakypy.utilities import pick
+        from snakypy.console import pick
 
         title = 'What is your favorite programming language?'
         options = ['C', 'C++', 'Java', 'Javascript', 'Python', 'Ruby']
         self.assertEqual(pick(title, options), 'python')
 
-    @patch('snakypy.utilities.pick', return_value=(5, 'python'))
+    @patch('snakypy.console.pick', return_value=(5, 'python'))
     def test_pick_with_index(self, input):
-        from snakypy.utilities import pick
+        from snakypy.console import pick
 
         title = 'What is your favorite programming language?'
         options = ['C', 'C++', 'Java', 'Javascript', 'Python', 'Ruby']
