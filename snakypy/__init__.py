@@ -5,8 +5,7 @@ import snakypy.utilities
 import snakypy.console
 import snakypy.tools
 from snakypy.utilities.bmi import bmi
-from snakypy.console.pick import pick
-from snakypy.utilities.colorful import printer, entry
+from snakypy.console import printer, pick
 from snakypy.tools import (GREEN_COLOR, BLACK_COLOR, MAGENTA_COLOR, BLUE_COLOR,
                            RED_COLOR, YELLOW_COLOR, CYAN_COLOR, WHITE_COLOR,
                            WARNING_ALERT, ERROR_ALERT, FINISH_ALERT, QUESTION_ALERT,

@@ -1,4 +1,4 @@
-from snakypy.utilities.colorful import printer, entry
+from snakypy.console.colorful import printer, entry
 from snakypy.tools.ansi import (QUESTION_ALERT,
                                 GREEN_COLOR,
                                 MAGENTA_COLOR,

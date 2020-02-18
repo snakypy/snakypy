@@ -1,6 +1,6 @@
 import time
 import sys
-from snakypy.utilities.colorful import printer
+from snakypy.console.colorful import printer
 from snakypy.tools.ansi import CYAN_COLOR, WARNING_ALERT
 from subprocess import check_output
 from subprocess import Popen, PIPE
