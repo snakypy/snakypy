@@ -1,10 +1,10 @@
 from snakypy.console.colorful import printer, entry
-from snakypy.tools.ansicolor import (QUESTION_ALERT,
-                                     GREEN_COLOR,
-                                     MAGENTA_COLOR,
-                                     NONE_SCOPE_ANSI,
-                                     WARNING_ALERT,
-                                     ERROR_ALERT)
+from snakypy.ansi import (QUESTION_ALERT,
+                          GREEN_COLOR,
+                          MAGENTA_COLOR,
+                          NONE_SCOPE_ANSI,
+                          WARNING_ALERT,
+                          ERROR_ALERT)
 
 
 def list_options(title_, options_, answer, colorful, index):

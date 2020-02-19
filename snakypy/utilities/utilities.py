@@ -1,7 +1,7 @@
 import time
 import sys
 from snakypy.console.colorful import printer
-from snakypy.tools.ansicolor import CYAN_COLOR, WARNING_ALERT
+from snakypy.ansi import CYAN_COLOR, WARNING_ALERT
 from subprocess import check_output
 from shutil import which
 from snakypy.tools.system import use_unix_system
