@@ -1,11 +1,9 @@
 """Tests for `snakypy` package."""
 import pytest
 import snakypy
-from snakypy.utilities import cleaner
-from os import makedirs
+import os
 from os.path import join
 from contextlib import suppress
-from snakypy.utilities.bmi import bmi
 from unittest.mock import patch
 from unittest import TestCase
 from . import __tmpdir__
@@ -15,7 +13,7 @@ def create_base_tests():
     """Function to create the temporary test base
     """
     with suppress(FileExistsError):
-        makedirs(__tmpdir__)
+        os.makedirs(__tmpdir__)
 
 
 # Creating the temporary test base.
@@ -45,7 +43,7 @@ def test_create_json_exists():
 
 
 def test_read_json_error():
-    cleaner(__tmpdir__, lst_files[1])
+    snakypy.utilities.cleaner(__tmpdir__, lst_files[1])
     with pytest.raises(FileNotFoundError):
         assert snakypy.json.read(join(__tmpdir__, lst_files[1]))
 
@@ -70,23 +68,21 @@ def test_update_json():
 
 
 # def test_update_json_not_found():
-#     data = snakypy.read.json2(join(__tmpdir__, lst_files[1]))
+#     data = snakypy.json.read(join(__tmpdir__, lst_files[1]))
 #     data['Hello'] = 'Marte!'
-#     cleaner(__tmpdir__, lst_files[1])
+#     snakypy.utilities.cleaner(__tmpdir__, lst_files[1])
 #     with pytest.raises(FileNotFoundError, Exception):
-#         assert snakypy.update.json2(join(__tmpdir__, lst_files[1]), data)
+#         assert snakypy.json.update(join(__tmpdir__, lst_files[1]), data)
 
 
 def test_get_shell():
-    from snakypy.utilities import get_shell
-
     shells = ['bash', 'zsh', 'sh', 'ksh']
-    shell = get_shell()
+    shell = snakypy.utilities.get_shell()
     assert shell in shells
 
 
 def test_percentage():
-    from snakypy.utilities import percentage
+    from snakypy.calculation import percentage
 
     perc = 5  # 5%
     whole = 120
@@ -102,33 +98,37 @@ def test_percentage():
     assert result_log_sub == f'>> {whole} - {perc}% = 114.00'
 
 
+def test_file_extension():
+    file = '/home/file.tar.gz'
+    assert snakypy.utilities.file_extension(file) == 'tar.gz'
+
+
 def test_command_real_time():
-    import snakypy.console
     assert snakypy.console.cmd('echo', ret=True, verbose=True) == 0
 
 
 def test_imc():
-    result = bmi('m', 70, 1.73)
+    result = snakypy.calculation.bmi('m', 70, 1.73)
     assert result == 'Normal weight.'
-    result = bmi('m', 59.2, 1.80)
+    result = snakypy.calculation.bmi('m', 59.2, 1.80)
     assert result == 'Under weight.'
-    result = bmi('m', 82.4, 1.69)
+    result = snakypy.calculation.bmi('m', 82.4, 1.69)
     assert result == 'Overweight.'
-    result = bmi('m', 90.1, 1.62)
+    result = snakypy.calculation.bmi('m', 90.1, 1.62)
     assert result == 'Obesity.'
-    result = bmi('f', 69.5, 1.68)
+    result = snakypy.calculation.bmi('f', 69.5, 1.68)
     assert result == 'Normal weight.'
-    result = bmi('f', 45.1, 1.71)
+    result = snakypy.calculation.bmi('f', 45.1, 1.71)
     assert result == 'Under weight.'
-    result = bmi('f', 83.7, 1.67)
+    result = snakypy.calculation.bmi('f', 83.7, 1.67)
     assert result == 'Overweight.'
-    result = bmi('f', 83.7, 1.58)
+    result = snakypy.calculation.bmi('f', 83.7, 1.58)
     assert result == 'Obesity.'
-    result = bmi('', 70, 1.70)
+    result = snakypy.calculation.bmi('', 70, 1.70)
     assert result is False
-    result = bmi('', '', 1.60)
+    result = snakypy.calculation.bmi('', '', 1.60)
     assert result is False
-    result = bmi('', '', '')
+    result = snakypy.calculation.bmi('', '', '')
     assert result is False
 
 
@@ -136,16 +136,12 @@ class TestBakeProject(TestCase):
 
     @patch('snakypy.console.pick', return_value='python')
     def test_pick_no_index(self, input):
-        from snakypy.console import pick
-
         title = 'What is your favorite programming language?'
         options = ['C', 'C++', 'Java', 'Javascript', 'Python', 'Ruby']
-        self.assertEqual(pick(title, options), 'python')
+        self.assertEqual(snakypy.console.pick(title, options), 'python')
 
     @patch('snakypy.console.pick', return_value=(5, 'python'))
     def test_pick_with_index(self, input):
-        from snakypy.console import pick
-
         title = 'What is your favorite programming language?'
         options = ['C', 'C++', 'Java', 'Javascript', 'Python', 'Ruby']
-        self.assertEqual(pick(title, options, index=True), (5, 'python'))
+        self.assertEqual(snakypy.console.pick(title, options, index=True), (5, 'python'))
