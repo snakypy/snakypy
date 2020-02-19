@@ -1,5 +1,5 @@
 from .credence import credence
 from .pick import pick
 from .colorful import printer, entry
-from .commands import cmd_verbose
+from .commands import cmd
 from .billboard import billboard

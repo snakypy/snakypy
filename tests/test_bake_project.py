@@ -103,8 +103,8 @@ def test_percentage():
 
 
 def test_command_real_time():
-    from snakypy.console import cmd_verbose
-    assert cmd_verbose('echo', ret=True) == 0
+    import snakypy.console
+    assert snakypy.console.cmd('echo', ret=True, verbose=True) == 0
 
 
 def test_imc():
