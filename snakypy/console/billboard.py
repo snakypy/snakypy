@@ -1,13 +1,13 @@
-def billboard(text, colorful=False):
+def billboard(text, ansicolor=None):
     import pyfiglet
     import snakypy
     from sys import platform
 
     ascii_banner = pyfiglet.figlet_format(text)
-    if colorful and platform.startswith('win'):
+    if ansicolor and platform.startswith('win'):
         raise Exception('>>> You cannot activate the color using Windows OS.')
-    if colorful:
-        return snakypy.printer(ascii_banner, style=snakypy.ansi.CYAN_COLOR)
+    if ansicolor:
+        return snakypy.printer(ascii_banner, style=ansicolor)
     return print(ascii_banner)
 
 # --------------------------------------------
