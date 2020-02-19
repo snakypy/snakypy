@@ -6,7 +6,6 @@ import snakypy.ansi
 import snakypy.tools
 import snakypy.calculation
 from snakypy.console import printer, entry, pick
-from snakypy.calculation import bmi
 
 
 __author__ = {
