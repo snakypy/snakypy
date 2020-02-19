@@ -1,3 +1,7 @@
+"""
+[summary]
+"""
+
 BLACK_COLOR = '\x1b[0;30m'
 MAGENTA_COLOR = '\x1b[0;95m'
 BLUE_COLOR = '\x1b[0;94m'
