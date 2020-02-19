@@ -2,7 +2,7 @@ from snakypy.tools.system import use_unix_system
 
 
 @use_unix_system
-def the_credits(app_name, app_version, app_url, data: dict):
+def credence(app_name, app_version, app_url, data: dict):
     """
     Print project development credits. Example:
     data = {
@@ -16,18 +16,18 @@ def the_credits(app_name, app_version, app_url, data: dict):
     """
 
     from datetime import date
-    from snakypy.tools.ansicolor import CYAN_COLOR, NONE_SCOPE_ANSI
+    from snakypy.ansi import CYAN_COLOR, NONE_SCOPE_ANSI
 
     try:
         if type(data) is not dict:
-            msg = f'>>> The function "{the_credits.__name__}" '\
+            msg = f'>>> The function "{credence.__name__}" '\
                 'must take a dictionary as an argument.'
             raise Exception(msg)
 
         print(CYAN_COLOR, f'{57 * "-"}'.center(75))
         print(f'{app_name} - Version {app_version}'.center(70))
         print(f'{57 * "-"}\n'.center(75))
-        for item in data['credits']:
+        for item in data['credence']:
             for key, value in item.items():
                 print(f'{key.title().replace("_", " ")}: {value}'.center(70))
 
@@ -37,6 +37,6 @@ def the_credits(app_name, app_version, app_url, data: dict):
         print(f'Home: {app_url}'.center(70))
         print(f'{57 * "-"}'.center(75), NONE_SCOPE_ANSI)
     except KeyError:
-        msg = "The 'credits' key was not found." \
+        msg = "The 'credence' key was not found." \
               "Enter a dictionary containing a 'credits' key."
         raise KeyError(msg)
