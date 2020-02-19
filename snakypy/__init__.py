@@ -3,9 +3,10 @@ import snakypy.json
 import snakypy.utilities
 import snakypy.console
 import snakypy.ansi
-from snakypy.console import printer, entry, pick
 import snakypy.tools
-from snakypy.utilities import bmi
+import snakypy.calculation
+from snakypy.console import printer, entry, pick
+from snakypy.calculation import bmi
 
 
 __author__ = {
