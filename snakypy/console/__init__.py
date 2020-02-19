@@ -3,3 +3,4 @@ from .pick import pick
 from .colorful import printer, entry
 from .commands import cmd
 from .billboard import billboard
+from .loading import loading
