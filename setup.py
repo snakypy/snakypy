@@ -37,10 +37,8 @@ with open(requirements_dev) as f:
     extras_require['dev'] = [i.strip().split('#', 1)[0].strip()
                              for i in f.read().strip().split('\n')]
 
-# Set licenses
-
 # Variables setup
-license = "MIT license",
+license_ = "MIT license",
 license_classifiers = "License :: OSI Approved :: MIT License"
 name = 'snakypy'
 url = 'https://github.com/williamcanin/snakypy'
@@ -52,10 +50,11 @@ url = 'https://github.com/williamcanin/snakypy'
 setup(
     name=name,
     version=__version__,
-    description='Snakypy is a package that contains ready-made wheels, and will help the developer to take shortcuts in development.',
+    description='Snakypy is a package that contains ready-made wheels,'
+                'and will help the developer to take shortcuts in development.',
     author=__author__['name'],
     author_email=__author__['email'],
-    license=license,
+    license=license_,
     maintainer=__author__['name'],
     # Types: text/plain, text/x-rst, text/markdown
     long_description_content_type='text/x-rst',
