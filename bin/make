@@ -145,7 +145,7 @@ EOF
 
 	function _generator_docs () {
 
-		rm -f docs/snakypy.rst
+		rm -f docs/snakypy*.rst
 		rm -f docs/modules.rst
 		rm -rf docs/_build
 		sphinx-apidoc -o docs/ snakypy
