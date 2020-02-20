@@ -205,7 +205,3 @@ def loading(set_time=0.030, bar=False, header='[Loading]', fg=''):
 
 
 __all__ = ['pick', 'entry', 'printer', 'billboard', 'cmd', 'credence', 'loading']
-
-if __name__ == '__main__':
-    title = 'What is your favorite programming language?'
-    options = ['C', 'C++', 'Java', 'Javascript', 'Python', 'Ruby']
