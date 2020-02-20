@@ -51,15 +51,14 @@ def file_extension(filename):
     return m.group(0)
 
 
-def cleaner(dir_path, *args, remove_all=False, recursive=False):
+def cleaner(directory, *file, level=None):
     """[summary]
 
     Arguments:
-        dir_path {[type]} -- [description]
+        directory {str} -- [description]
 
     Keyword Arguments:
-        remove_all {bool} -- [description] (default: {False})
-        recursive {bool} -- In development. Not use. (default: {False})
+        level {int} -- [description] (default: {False})
 
     Raises:
         FileNotFoundError: [description]
@@ -67,25 +66,35 @@ def cleaner(dir_path, *args, remove_all=False, recursive=False):
 
     from os import walk, remove
     from os.path import join
+    from shutil import rmtree
+    from threading import Thread
+
+    data = next(walk(directory))
+
+    #: DANGER!
+    if level == 0:
+        for f in data[2]:
+            remove(join(data[0], f))
+        return 0
+
+    #: DANGER!
+    if level == 1:
+        # r: root, r: directory, f: files
+        for r, d, f in walk(directory, topdown=False):
+            for item in d:
+                t = Thread(target=rmtree(join(r, item)), args=())
+                t.start()
+        return 1
 
     try:
-        data = next(walk(dir_path))
-
-        # TODO: In development
-        if recursive:
-            # from glob import glob
+        if file:
+            for f in file:
+                remove(join(data[0], f))
             return
-
-        if remove_all:
-            for file in data[2]:
-                remove(join(data[0], file))
-                return
-        for i in args:
-            remove(join(data[0], i))
-        return
     except FileNotFoundError as err:
-        raise FileNotFoundError('>>> There was an error removing the files', err)
-        
+        msg = '>>> There was an error removing the files'
+        raise FileNotFoundError(msg, err)
+
 
 __all__ = ['get_shell', 'file_extension']
 
