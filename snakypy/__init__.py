@@ -5,8 +5,8 @@ import snakypy.console
 import snakypy.ansi
 import snakypy.tools
 import snakypy.calculation
-from snakypy.console import printer, entry, pick
 from snakypy.ansi import FG, BG
+from snakypy.console import printer, entry, pick
 
 
 __author__ = {
