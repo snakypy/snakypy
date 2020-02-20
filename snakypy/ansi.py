@@ -1,24 +1,37 @@
-"""
-[summary]
-"""
-
-BLACK_COLOR = '\x1b[0;30m'
-MAGENTA_COLOR = '\x1b[0;95m'
-BLUE_COLOR = '\x1b[0;94m'
-GREEN_COLOR = '\x1b[0;92m'
-RED_COLOR = '\x1b[0;91m'
-YELLOW_COLOR = '\x1b[0;93m'
-CYAN_COLOR = '\x1b[0;96m'
-WHITE_COLOR = '\x1b[0;37m'
-NONE_SCOPE_ANSI = '\x1b[0m'
-
-WARNING_ALERT = f'{YELLOW_COLOR}⚠ '
-ERROR_ALERT = f'{RED_COLOR}✖ '
-FINISH_ALERT = f'{GREEN_COLOR}✔ '
-QUESTION_ALERT = f'{CYAN_COLOR}➜ '
+NONE = '\x1b[0m'
+""""""
 
 
-__all__ = ['BLACK_COLOR', 'MAGENTA_COLOR', 'BLUE_COLOR', 'GREEN_COLOR',
-           'RED_COLOR', 'YELLOW_COLOR', 'CYAN_COLOR', 'WHITE_COLOR',
-           'WARNING_ALERT', 'ERROR_ALERT', 'FINISH_ALERT', 'QUESTION_ALERT',
-           'NONE_SCOPE_ANSI']
+class FG:
+    BLACK = '\x1b[30m'
+    MAGENTA = '\x1b[95m'
+    BLUE = '\x1b[94m'
+    GREEN = '\x1b[92m'
+    RED = '\x1b[91m'
+    YELLOW = '\x1b[93m'
+    CYAN = '\x1b[96m'
+    WHITE = '\x1b[97m'
+
+    WARNING = f'{YELLOW}⚠ '
+    ERROR = f'{RED}✖ '
+    FINISH = f'{GREEN}✔ '
+    QUESTION = f'{CYAN}➜ '
+
+
+class BG:
+    BLACK = '\x1b[40m'
+    MAGENTA = '\x1b[105m'
+    BLUE = '\x1b[104m'
+    GREEN = '\x1b[102m'
+    RED = '\x1b[101m'
+    YELLOW = '\x1b[103m'
+    CYAN = '\x1b[106m'
+    WHITE = '\x1b[107m'
+
+    WARNING = f'{YELLOW}⚠ '
+    ERROR = f'{RED}✖ '
+    FINISH = f'{GREEN}✔ '
+    QUESTION = f'{CYAN}➜ '
+
+
+__all__ = ['NONE', 'FG', 'BG']
