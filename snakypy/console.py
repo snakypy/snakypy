@@ -1,45 +1,40 @@
-from snakypy.tools import use_unix_system
-from snakypy.ansi import NONE_SCOPE_ANSI, WARNING_ALERT
-from snakypy.ansi import (QUESTION_ALERT,
-                          GREEN_COLOR,
-                          MAGENTA_COLOR,
-                          NONE_SCOPE_ANSI,
-                          WARNING_ALERT,
-                          ERROR_ALERT)
+from snakypy.tools import use_unix_system, denying_win
+from snakypy.ansi import NONE, FG
+
 
 @use_unix_system
-def printer(*args, style=NONE_SCOPE_ANSI, sep=' ', end='\n', file=None, flush=False):
+def printer(*args, fg='', bg='', sep=' ', end='\n', file=None, flush: bool = False):
     lst = []
     for i in range(len(args)):
         lst.append(args[i])
     text = ' '.join(map(str, lst))
 
-    return print(f'{style}{text}{NONE_SCOPE_ANSI}', sep=sep, end=end, file=file, flush=flush)
+    return print(f'{NONE}{fg}{bg}{text}{NONE}', sep=sep, end=end, file=file, flush=flush)
 
 
 @use_unix_system
-def entry(text, *, style='', jump_line='\n> '):
+def entry(text, *, fg='', bg='', jump_line: str = '\n> '):
     try:
-        return input(f'{style}{text}{jump_line}{NONE_SCOPE_ANSI}')
+        return input(f'{NONE}{fg}{bg}{text}{jump_line}{NONE}')
     except KeyboardInterrupt:
-        print(f'\n{WARNING_ALERT} Aborted by user.{NONE_SCOPE_ANSI}')
-        
+        print(f'\n{FG.WARNING} Aborted by user.{NONE}')
 
-def list_options(title_, options_, answer, colorful, index):
+
+def pick_options(title_, options_, answer, colorful=False, index=False):
     if colorful:
-        printer(title_, '(Ctrl+C to Cancel)', style=QUESTION_ALERT)
+        printer(title_, '(Ctrl+C to Cancel)', fg=FG.QUESTION)
     else:
         print(title_, '(Ctrl+C to Cancel)')
     count = 1
     for option in options_:
         if colorful:
-            print(f'{GREEN_COLOR}[{count}] {MAGENTA_COLOR}{option}{NONE_SCOPE_ANSI}')
+            print(f'{FG.GREEN}[{count}] {FG.MAGENTA}{option}{NONE}')
         else:
             print(f'[{count}] {option}')
         count += 1
     try:
         if colorful:
-            pos = int(entry(answer, style=QUESTION_ALERT)) - 1
+            pos = int(input(f'{FG.QUESTION}{answer} {NONE}')) - 1
         else:
             pos = int(input(answer)) - 1
         assert pos > -1
@@ -48,13 +43,13 @@ def list_options(title_, options_, answer, colorful, index):
         return options_[pos].lower()
     except Exception:
         if colorful:
-            printer('Option invalid!', style=ERROR_ALERT)
+            printer('Option invalid!', fg=FG.ERROR)
         else:
             print('Option invalid!')
         return False
     except KeyboardInterrupt:
         if colorful:
-            printer('Canceled by user.', style=WARNING_ALERT)
+            printer('Canceled by user.', fg=FG.WARNING)
         else:
             print('Canceled by user.')
         return
@@ -66,7 +61,7 @@ def pick(title_, options_, *,
          colorful=False):
     try:
         while True:
-            option = list_options(title_,
+            option = pick_options(title_,
                                   options_,
                                   answer=answer,
                                   index=index,
@@ -78,17 +73,16 @@ def pick(title_, options_, *,
         raise Exception('An unexpected error occurs when using pick')
 
 
-def billboard(text, ansicolor=None):
+def billboard(text, fg='', bg=''):
     import pyfiglet
     import snakypy
-    from sys import platform
 
     ascii_banner = pyfiglet.figlet_format(text)
-    if ansicolor and platform.startswith('win'):
-        raise Exception('>>> You cannot activate the color using Windows OS.')
-    if ansicolor:
-        return snakypy.printer(ascii_banner, style=ansicolor)
+    denying_win(fg, bg)
+    if not fg == '' or not bg == '':
+        return snakypy.printer(ascii_banner, fg=fg, bg=bg)
     return print(ascii_banner)
+
 
 # --------------------------------------------
 # Function that does not use pyfliglet package
@@ -120,7 +114,7 @@ def cmd(command, shell=True, universal_newlines=True, ret=False, verbose=False):
         return r
 
 
-def credence(app_name, app_version, app_url, data: dict, ansicolor=''):
+def credence(app_name, app_version, app_url, data: dict, fg=''):
     """
     Print project development credits. Example:
     data = {
@@ -134,41 +128,42 @@ def credence(app_name, app_version, app_url, data: dict, ansicolor=''):
     """
 
     from datetime import date
-    from snakypy.console import printer
 
     try:
+        denying_win(fg)
+
         if type(data) is not dict:
-            msg = f'>>> The function "{credence.__name__}" '\
-                'must take a dictionary as an argument.'
+            msg = f'>>> The function "{credence.__name__}" ' \
+                  'must take a dictionary as an argument.'
             raise Exception(msg)
 
         # print(CYAN_COLOR, f'{57 * "-"}'.center(75))
-        printer(f'{57 * "-"}'.center(75), style=ansicolor)
+        printer(f'{57 * "-"}'.center(75), fg=fg)
         # print(f'{app_name} - Version {app_version}'.center(70))
-        printer(f'{app_name} - Version {app_version}'.center(70), style=ansicolor)
+        printer(f'{app_name} - Version {app_version}'.center(70), fg=fg)
         # print(f'{57 * "-"}\n'.center(75))
-        printer(f'{57 * "-"}\n'.center(75), style=ansicolor)
-        printer(f'Credence:\n'.center(70), style=ansicolor)
+        printer(f'{57 * "-"}\n'.center(75), fg=fg)
+        printer(f'Credence:\n'.center(70), fg=fg)
         for item in data['credence']:
             for key, value in item.items():
                 # print(f'{key.title().replace("_", " ")}: {value}'.center(70))
-                printer(f'{key.title().replace("_", " ")}: {value}'.center(70), style=ansicolor)
+                printer(f'{key.title().replace("_", " ")}: {value}'.center(70), fg=fg)
         print()
         # print(f'{57 * "-"}'.center(75))
-        printer(f'{57 * "-"}'.center(75), style=ansicolor)
+        printer(f'{57 * "-"}'.center(75), fg=fg)
         # print(f'{app_name} © {date.today().year} - All Right Reserved.'.center(70))
-        printer(f'{app_name} © {date.today().year} - All Right Reserved.'.center(70), style=ansicolor)
+        printer(f'{app_name} © {date.today().year} - All Right Reserved.'.center(70), fg=fg)
         # print(f'Home: {app_url}'.center(70))
-        printer(f'Home: {app_url}'.center(70), style=ansicolor)
+        printer(f'Home: {app_url}'.center(70), fg=fg)
         # print(f'{57 * "-"}'.center(75), NONE_SCOPE_ANSI)
-        printer(f'{57 * "-"}'.center(75), style=ansicolor)
+        printer(f'{57 * "-"}'.center(75), fg=fg)
     except KeyError:
         msg = "The 'credence' key was not found." \
               "Enter a dictionary containing a 'credits' key."
         raise KeyError(msg)
 
 
-def loading(set_time=0.030, bar=False, header='[Loading]', colorful=False):
+def loading(set_time=0.030, bar=False, header='[Loading]', fg=''):
     """[summary]
 
     Keyword Arguments:
@@ -182,22 +177,19 @@ def loading(set_time=0.030, bar=False, header='[Loading]', colorful=False):
 
     import time
     import sys
-    from snakypy.console.colorful import printer
-    from snakypy.ansi import CYAN_COLOR, WARNING_ALERT
 
-    if colorful:
-        printer(header, style=CYAN_COLOR)
-    else:
-        print(header)
+    denying_win(fg)
+    printer(header, fg=fg)
     try:
         if bar:
             for i in range(0, 100):
                 time.sleep(set_time)  # 5 seconds
                 width = (i + 1) / 4
-                bar = f"[{'#' * int(width)} {' ' * (25 - int(width))}]"
+                bar = f"[{'#' * int(width)}{' ' * (25 - int(width))}]"
                 sys.stdout.write(u"\u001b[1000D" + bar)
                 sys.stdout.flush()
-            # return 'bar'
+            print()
+            return
         for i in range(0, 100):
             time.sleep(set_time)
             sys.stdout.write(u"\u001b[1000D")
@@ -206,19 +198,14 @@ def loading(set_time=0.030, bar=False, header='[Loading]', colorful=False):
             sys.stdout.write(f'{str(i + 1)}%')
             sys.stdout.flush()
         print()
-        # return 'percent'
+        return
     except KeyboardInterrupt:
-        if colorful:
-            printer('\nCanceled by user.', style=WARNING_ALERT)
-        else:
-            print('\nCanceled by user.')
+        printer('\nCanceled by user.', fg=fg)
         return
 
 
 __all__ = ['pick', 'entry', 'printer', 'billboard', 'cmd', 'credence', 'loading']
 
-
 if __name__ == '__main__':
     title = 'What is your favorite programming language?'
     options = ['C', 'C++', 'Java', 'Javascript', 'Python', 'Ruby']
-    print(pick(title, options, colorful=True))
