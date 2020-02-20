@@ -96,5 +96,4 @@ def cleaner(directory, *file, level=None):
         raise FileNotFoundError(msg, err)
 
 
-__all__ = ['get_shell', 'file_extension']
-
+__all__ = ['get_shell', 'file_extension', 'cleaner']
