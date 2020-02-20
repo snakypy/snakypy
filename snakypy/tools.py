@@ -23,7 +23,7 @@ def use_unix_system(func):
     return wrapper
 
 
-def denying_win(*args, os_denied='win'):
+def denying_win(*args, os='win'):
     from sys import platform
 
     # Linux: 'linux'
@@ -31,10 +31,10 @@ def denying_win(*args, os_denied='win'):
     # Windows: 'win'
 
     if args:
-        if (args != '') and platform.startswith(os_denied):
+        if (args != '') and platform.startswith(os):
             raise Exception('>>> You cannot activate the color using Windows OS.')
     else:
-        if platform.startswith(os_denied):
+        if platform.startswith(os):
             msg = 'Invalid operating system (Windows). ' \
                   f'This function "{__name__}" is compatible with ' \
                   '"Linux" and "Mac OS X" systems only.'
