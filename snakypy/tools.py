@@ -42,4 +42,4 @@ def use_unix_system(func):
 #             raise Exception(msg)
 
 
-__all__ = ['use_unix_system', 'denying_win']
+__all__ = ['use_unix_system']
