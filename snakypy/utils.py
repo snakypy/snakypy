@@ -33,11 +33,9 @@ def get_shell():
     from sys import platform
 
     if not platform.startswith('win'):
-        s = check_output('echo $SHELL', shell=True, universal_newlines=True)
-        zero_ = check_output("echo $0", shell=True, universal_newlines=True)
+        s = check_output("echo $0", shell=True, universal_newlines=True)
         lst = s.strip('\n').strip('').split('/')
-        # return lst[2]
-        return lst, s, zero_
+        return lst[2]
 
 
 def file_extension(filename):
