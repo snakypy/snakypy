@@ -77,10 +77,9 @@ def test_read_json_error():
 
 
 def test_get_shell():
-    # shells = ['bash', 'zsh', 'sh', 'ksh']
+    shells = ['bash', 'zsh', 'sh', 'ksh']
     shell = snakypy.utils.get_shell()
-    print(shell)
-    # assert shell in shells
+    assert shell in shells
 
 
 def test_percentage():
