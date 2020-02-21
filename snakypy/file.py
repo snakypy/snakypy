@@ -37,3 +37,6 @@ def create(content, file_path, force=False):
                 return True
         except Exception as err:
             raise Exception(f'>>> There was an error creating the file: {err}')
+
+
+__all__ = ['read', 'create']
