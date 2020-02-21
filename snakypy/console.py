@@ -1,13 +1,13 @@
-from snakypy.tools import use_unix_system, denying_win
+from snakypy.tools import use_unix_system
 from snakypy.ansi import NONE, FG, BG, SGR
 
 
 def verify_attr(*args):
     if args[0] and args[0] not in FG.__dict__.values():
-        msg = 'Attribute invalid in parameter "fg". Must receive from FG class.'
+        msg = 'Attribute invalid in parameter "foreground". Must receive from FG class.'
         raise AttributeError(msg)
     if args[1] and args[1] not in BG.__dict__.values():
-        msg = 'Attribute invalid in parameter "bg". Must receive from BG class.'
+        msg = 'Attribute invalid in parameter "background". Must receive from BG class.'
         raise AttributeError(msg)
     if args[2] and args[2] not in SGR.__dict__.values():
         msg = 'Attribute invalid in parameter "sgr". Must receive from SGR class.'
@@ -15,74 +15,65 @@ def verify_attr(*args):
 
 
 @use_unix_system
-def printer(*args, fg: str = '', bg: str = '', sgr: str = '',
-            sep: str = ' ', end: str = '\n', file=None, flush: bool = False):
+def printer(*args, foreground='', background='', sgr='',
+            sep=' ', end='\n', file=None, flush=False):
 
-    verify_attr(fg, bg, sgr)
+    verify_attr(foreground, background, sgr)
 
     lst = []
     for i in range(len(args)):
         lst.append(args[i])
     text = ' '.join(map(str, lst))
 
-    return print(f'{NONE}{sgr}{fg}{bg}{text}{NONE}', sep=sep, end=end, file=file,
-                 flush=flush)
+    return print(f'{NONE}{sgr}{foreground}{background}{text}{NONE}',
+                 sep=sep, end=end, file=file, flush=flush)
 
 
 @use_unix_system
-def entry(text, *, fg: str = '', bg: str = '', sgr: str = '', jump_line: str = '\n> '):
+def entry(text, *, foreground='', background='', sgr='', jump_line='\n> '):
 
-    verify_attr(fg, bg, sgr)
+    verify_attr(foreground, background, sgr)
 
     try:
-        return input(f'{NONE}{sgr}{fg}{bg}{text}{jump_line}{NONE}')
+        return input(f'{NONE}{sgr}{foreground}{background}{text}{jump_line}{NONE}')
     except KeyboardInterrupt:
         print(f'\n{FG.WARNING} Aborted by user.{NONE}')
 
 
-def pick_options(title_, options_, answer, colorful=False, index=False):
-    if colorful:
-        printer(title_, '(Ctrl+C to Cancel)', fg=FG.QUESTION)
-    else:
-        print(title_, '(Ctrl+C to Cancel)')
+def pick_options(title_, options, answer, colorful=False, index=False):
+    printer(title_, '(Ctrl+C to Cancel)', foreground=FG.QUESTION)
     count = 1
-    for option in options_:
-        if colorful:
-            print(f'{FG.GREEN}[{count}] {FG.MAGENTA}{option}{NONE}')
-        else:
-            print(f'[{count}] {option}')
+    for option in options:
+        print(f'{FG.GREEN}[{count}] {FG.MAGENTA}{option}{NONE}')
         count += 1
     try:
-        if colorful:
-            pos = int(input(f'{FG.CYAN}{answer} {NONE}')) - 1
-        else:
-            pos = int(input(answer)) - 1
+        pos = int(input(f'{FG.CYAN}{answer} {NONE}')) - 1
         assert pos > -1
         if index:
-            return pos, options_[pos].lower()
-        return options_[pos].lower()
+            return pos, options[pos].lower()
+        return options[pos].lower()
     except Exception:
-        if colorful:
-            printer('Option invalid!', fg=FG.ERROR)
-        else:
-            print('Option invalid!')
+        printer('Option invalid!', foreground=FG.ERROR)
         return False
     except KeyboardInterrupt:
-        if colorful:
-            printer('Canceled by user.', fg=FG.WARNING)
-        else:
-            print('Canceled by user.')
+        printer('Canceled by user.', foreground=FG.WARNING)
         return
 
 
-def pick(title_, options_, *,
+def pick(title_, options, *,
          answer='Answer:',
          index=False,
          colorful=False):
+
+    from sys import platform
+
+    if colorful is True and platform.startswith('win'):
+        raise Exception('>>> You cannot activate the color using Windows OS.')
+
     try:
         while True:
             option = pick_options(title_,
-                                  options_,
+                                  options,
                                   answer=answer,
                                   index=index,
                                   colorful=colorful)
@@ -93,31 +84,32 @@ def pick(title_, options_, *,
         raise Exception('An unexpected error occurs when using pick')
 
 
-def billboard(text, fg='', bg=''):
+def billboard(text, foreground='', background=''):
     import pyfiglet
     import snakypy
 
-    ascii_banner = pyfiglet.figlet_format(text)
-    denying_win(fg, bg)
-    if not fg == '' or not bg == '':
-        verify_attr(fg, bg)
-        return snakypy.printer(ascii_banner, fg=fg, bg=bg)
-    return print(ascii_banner)
+    banner = pyfiglet.figlet_format(text)
+    # denying_win(foreground, background)
+    if not foreground == '' or not background == '':
+        return snakypy.printer(banner, foreground=foreground,
+                               background=background)
+    return print(banner)
 
 
 # --------------------------------------------
 # Function that does not use pyfliglet package
 # --------------------------------------------
-# def billboard2(text):
+# def billboard(text, foreground='', background=''):
 #     from snakypy.utilities.utilities import is_tool
-#     from snakypy.console.commands import cmd_verbose
+#     from shutil import which
+#     from snakypy.console import cmd
 #
-#     if is_tool('figlet'):
-#         return cmd_verbose(f'figlet {text}', ret=False)
+#     if which('figlet') is not None:
+#         return cmd(f'figlet {text}')
 #     return print(text)
 
 
-def cmd(command, shell=True, universal_newlines=True, ret=False, verbose=False):
+def cmd(command, *args, shell=True, universal_newlines=True, ret=False, verbose=False):
     """
     Function that uses the subprocess library with Popen.
     The function receives a command as an argument and shows
@@ -129,13 +121,13 @@ def cmd(command, shell=True, universal_newlines=True, ret=False, verbose=False):
                     universal_newlines=universal_newlines)
     if verbose:
         for line in iter(process.stdout.readline, ''):
-            print(line.rstrip())
+            print(NONE, *args, line.rstrip(), NONE)
     if ret:
         r = process.poll()
         return r
 
 
-def credence(app_name, app_version, app_url, data: dict, fg=''):
+def credence(app_name, app_version, app_url, data: dict, foreground=''):
     """
     Print project development credits. Example:
     data = {
@@ -151,7 +143,7 @@ def credence(app_name, app_version, app_url, data: dict, fg=''):
     from datetime import date
 
     try:
-        denying_win(fg)
+        # denying_win(foreground)
 
         if type(data) is not dict:
             msg = f'>>> The function "{credence.__name__}" ' \
@@ -159,32 +151,35 @@ def credence(app_name, app_version, app_url, data: dict, fg=''):
             raise Exception(msg)
 
         # print(CYAN_COLOR, f'{57 * "-"}'.center(75))
-        printer(f'{57 * "-"}'.center(75), fg=fg)
+        printer(f'{57 * "-"}'.center(75), foreground=foreground)
         # print(f'{app_name} - Version {app_version}'.center(70))
-        printer(f'{app_name} - Version {app_version}'.center(70), fg=fg)
+        printer(f'{app_name} - Version {app_version}'.center(70),
+                foreground=foreground)
         # print(f'{57 * "-"}\n'.center(75))
-        printer(f'{57 * "-"}\n'.center(75), fg=fg)
-        printer(f'Credence:\n'.center(70), fg=fg)
+        printer(f'{57 * "-"}\n'.center(75), foreground=foreground)
+        printer(f'Credence:\n'.center(70), foreground=foreground)
         for item in data['credence']:
             for key, value in item.items():
                 # print(f'{key.title().replace("_", " ")}: {value}'.center(70))
-                printer(f'{key.title().replace("_", " ")}: {value}'.center(70), fg=fg)
+                printer(f'{key.title().replace("_", " ")}: {value}'.center(70),
+                        foreground=foreground)
         print()
         # print(f'{57 * "-"}'.center(75))
-        printer(f'{57 * "-"}'.center(75), fg=fg)
+        printer(f'{57 * "-"}'.center(75), foreground=foreground)
         # print(f'{app_name} © {date.today().year} - All Right Reserved.'.center(70))
-        printer(f'{app_name} © {date.today().year} - All Right Reserved.'.center(70), fg=fg)
+        printer(f'{app_name} © {date.today().year} - All Right Reserved.'.center(70),
+                foreground=foreground)
         # print(f'Home: {app_url}'.center(70))
-        printer(f'Home: {app_url}'.center(70), fg=fg)
+        printer(f'Home: {app_url}'.center(70), foreground=foreground)
         # print(f'{57 * "-"}'.center(75), NONE_SCOPE_ANSI)
-        printer(f'{57 * "-"}'.center(75), fg=fg)
+        printer(f'{57 * "-"}'.center(75), foreground=foreground)
     except KeyError:
         msg = "The 'credence' key was not found." \
               "Enter a dictionary containing a 'credits' key."
         raise KeyError(msg)
 
 
-def loading(set_time=0.030, bar=False, header='[Loading]', fg=''):
+def loading(set_time=0.030, bar=False, header='[Loading]', foreground=''):
     """[summary]
 
     Keyword Arguments:
@@ -199,8 +194,8 @@ def loading(set_time=0.030, bar=False, header='[Loading]', fg=''):
     import time
     import sys
 
-    denying_win(fg)
-    printer(header, fg=fg)
+    # denying_win(foreground)
+    printer(header, foreground=foreground)
     try:
         if bar:
             for i in range(0, 100):
@@ -221,7 +216,7 @@ def loading(set_time=0.030, bar=False, header='[Loading]', fg=''):
         print()
         return
     except KeyboardInterrupt:
-        printer('\nCanceled by user.', fg=fg)
+        printer('\nCanceled by user.', foreground=FG.WARNING)
         return
 
 
