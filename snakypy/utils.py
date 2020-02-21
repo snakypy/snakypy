@@ -35,8 +35,8 @@ def get_shell():
     if not platform.startswith('win'):
         s = check_output('echo $SHELL', shell=True, universal_newlines=True)
         lst = s.strip('\n').strip('').split('/')
-        return lst[2]
-
+        # return lst[2]
+        return lst
 
 def file_extension(filename):
     """[summary]
