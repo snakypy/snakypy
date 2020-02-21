@@ -1,10 +1,10 @@
 import snakypy.file
 import snakypy.json
-import snakypy.utilities
+import snakypy.utils
 import snakypy.console
 import snakypy.ansi
 import snakypy.tools
-import snakypy.calculation
+import snakypy.calc
 from snakypy.ansi import FG, BG, SGR
 from snakypy.console import printer, entry, pick
 

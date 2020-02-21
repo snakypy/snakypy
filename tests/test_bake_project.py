@@ -43,7 +43,7 @@ def test_create_json_exists():
 
 
 def test_read_json_error():
-    snakypy.utilities.cleaner(__tmpdir__, lst_files[1])
+    snakypy.utils.cleaner(__tmpdir__, lst_files[1])
     with pytest.raises(FileNotFoundError):
         assert snakypy.json.read(join(__tmpdir__, lst_files[1]))
 
@@ -77,12 +77,12 @@ def test_update_json():
 
 def test_get_shell():
     shells = ['bash', 'zsh', 'sh', 'ksh']
-    shell = snakypy.utilities.get_shell()
+    shell = snakypy.utils.get_shell()
     assert shell in shells
 
 
 def test_percentage():
-    from snakypy.calculation import percentage
+    from snakypy.calc import percentage
 
     perc = 5  # 5%
     whole = 120
@@ -100,7 +100,7 @@ def test_percentage():
 
 def test_file_extension():
     file = '/home/file.tar.gz'
-    assert snakypy.utilities.file_extension(file) == 'tar.gz'
+    assert snakypy.utils.file_extension(file) == 'tar.gz'
 
 
 def test_command_real_time():
@@ -108,27 +108,27 @@ def test_command_real_time():
 
 
 def test_imc():
-    result = snakypy.calculation.bmi('m', 70, 1.73)
+    result = snakypy.calc.bmi('m', 70, 1.73)
     assert result == 'Normal weight.'
-    result = snakypy.calculation.bmi('m', 59.2, 1.80)
+    result = snakypy.calc.bmi('m', 59.2, 1.80)
     assert result == 'Under weight.'
-    result = snakypy.calculation.bmi('m', 82.4, 1.69)
+    result = snakypy.calc.bmi('m', 82.4, 1.69)
     assert result == 'Overweight.'
-    result = snakypy.calculation.bmi('m', 90.1, 1.62)
+    result = snakypy.calc.bmi('m', 90.1, 1.62)
     assert result == 'Obesity.'
-    result = snakypy.calculation.bmi('f', 69.5, 1.68)
+    result = snakypy.calc.bmi('f', 69.5, 1.68)
     assert result == 'Normal weight.'
-    result = snakypy.calculation.bmi('f', 45.1, 1.71)
+    result = snakypy.calc.bmi('f', 45.1, 1.71)
     assert result == 'Under weight.'
-    result = snakypy.calculation.bmi('f', 83.7, 1.67)
+    result = snakypy.calc.bmi('f', 83.7, 1.67)
     assert result == 'Overweight.'
-    result = snakypy.calculation.bmi('f', 83.7, 1.58)
+    result = snakypy.calc.bmi('f', 83.7, 1.58)
     assert result == 'Obesity.'
-    result = snakypy.calculation.bmi('', 70, 1.70)
+    result = snakypy.calc.bmi('', 70, 1.70)
     assert result is False
-    result = snakypy.calculation.bmi('', '', 1.60)
+    result = snakypy.calc.bmi('', '', 1.60)
     assert result is False
-    result = snakypy.calculation.bmi('', '', '')
+    result = snakypy.calc.bmi('', '', '')
     assert result is False
 
 
