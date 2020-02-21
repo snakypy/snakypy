@@ -23,22 +23,23 @@ def use_unix_system(func):
     return wrapper
 
 
-def denying_win(*args, os='win'):
-    from sys import platform
-
-    # Linux: 'linux'
-    # OS X: 'darwin'
-    # Windows: 'win'
-
-    if args:
-        if (args != '') and platform.startswith(os):
-            raise Exception('>>> You cannot activate the color using Windows OS.')
-    else:
-        if platform.startswith(os):
-            msg = 'Invalid operating system (Windows). ' \
-                  f'This function "{__name__}" is compatible with ' \
-                  '"Linux" and "Mac OS X" systems only.'
-            raise Exception(msg)
+# DEPRECATED!
+# def denying_win(*args, os='win'):
+#     from sys import platform
+#
+#     # Linux: 'linux'
+#     # OS X: 'darwin'
+#     # Windows: 'win'
+#
+#     if args:
+#         if (args != '') and platform.startswith(os):
+#             raise Exception('>>> You cannot activate the color using Windows OS.')
+#     else:
+#         if platform.startswith(os):
+#             msg = 'Invalid operating system (Windows). ' \
+#                   f'This function "{__name__}" is compatible with ' \
+#                   '"Linux" and "Mac OS X" systems only.'
+#             raise Exception(msg)
 
 
 __all__ = ['use_unix_system', 'denying_win']
