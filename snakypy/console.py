@@ -1,21 +1,41 @@
 from snakypy.tools import use_unix_system, denying_win
-from snakypy.ansi import NONE, FG
+from snakypy.ansi import NONE, FG, BG, SGR
+
+
+def verify_attr(*args):
+    if args[0] and args[0] not in FG.__dict__.values():
+        msg = 'Attribute invalid in parameter "fg". Must receive from FG class.'
+        raise AttributeError(msg)
+    if args[1] and args[1] not in BG.__dict__.values():
+        msg = 'Attribute invalid in parameter "bg". Must receive from BG class.'
+        raise AttributeError(msg)
+    if args[2] and args[2] not in SGR.__dict__.values():
+        msg = 'Attribute invalid in parameter "bg". Must receive from BG class.'
+        raise AttributeError(msg)
 
 
 @use_unix_system
-def printer(*args, fg='', bg='', sep=' ', end='\n', file=None, flush: bool = False):
+def printer(*args, fg: str = '', bg: str = '', sgr: str = '',
+            sep: str = ' ', end: str = '\n', file=None, flush: bool = False):
+
+    verify_attr(fg, bg, sgr)
+
     lst = []
     for i in range(len(args)):
         lst.append(args[i])
     text = ' '.join(map(str, lst))
 
-    return print(f'{NONE}{fg}{bg}{text}{NONE}', sep=sep, end=end, file=file, flush=flush)
+    return print(f'{NONE}{sgr}{fg}{bg}{text}{NONE}', sep=sep, end=end, file=file,
+                 flush=flush)
 
 
 @use_unix_system
-def entry(text, *, fg='', bg='', jump_line: str = '\n> '):
+def entry(text, *, fg: str = '', bg: str = '', sgr: str = '', jump_line: str = '\n> '):
+
+    verify_attr(fg, bg, sgr)
+
     try:
-        return input(f'{NONE}{fg}{bg}{text}{jump_line}{NONE}')
+        return input(f'{NONE}{sgr}{fg}{bg}{text}{jump_line}{NONE}')
     except KeyboardInterrupt:
         print(f'\n{FG.WARNING} Aborted by user.{NONE}')
 
@@ -34,7 +54,7 @@ def pick_options(title_, options_, answer, colorful=False, index=False):
         count += 1
     try:
         if colorful:
-            pos = int(input(f'{FG.QUESTION}{answer} {NONE}')) - 1
+            pos = int(input(f'{FG.CYAN}{answer} {NONE}')) - 1
         else:
             pos = int(input(answer)) - 1
         assert pos > -1
@@ -80,6 +100,7 @@ def billboard(text, fg='', bg=''):
     ascii_banner = pyfiglet.figlet_format(text)
     denying_win(fg, bg)
     if not fg == '' or not bg == '':
+        verify_attr(fg, bg)
         return snakypy.printer(ascii_banner, fg=fg, bg=bg)
     return print(ascii_banner)
 
