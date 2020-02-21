@@ -134,3 +134,6 @@ dmypy.json
 # Ignore file docs
 docs/modules.rst
 docs/snakypy*.rst
+
+# Tests
+tests/.tmp/
