@@ -21,7 +21,7 @@ from os.path import join
 #     Notify.Notification.new(message, description, dialog).show()
 
 
-# @use_unix_system
+@use_unix_system
 def get_shell():
     """Function to get the currently activated shell.
     :return: Returns the name of the current shell.
