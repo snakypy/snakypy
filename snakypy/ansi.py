@@ -7,6 +7,16 @@ import sys
 
 
 def return_ansi_or_not(value):
+    """This function checks if the operating system is Windows, and
+    if an empty value is returned for each variable that represents a
+    color in Ansi.
+
+    Arguments:
+        value {str} -- Receives a string in the form of Ansi color.
+
+    Returns:
+        [str] -- It will return an Ansi scape code, or an empty string.
+    """
     if sys.platform.startswith('win'):
         return ''
     return value
@@ -60,7 +70,7 @@ class BG:
 
 class SGR:
     """
-
+    SGR class that receives effects for text such as underline, blink, etc.
     """
 
     BOLD = return_ansi_or_not('\x1b[1m')
