@@ -1,5 +1,6 @@
 from subprocess import check_output
 from snakypy.tools import use_unix_system
+from os.path import join
 
 
 # ----------------------------------------
@@ -64,9 +65,8 @@ def cleaner(directory, *file, level=None):
         FileNotFoundError: [description]
     """
 
-    from os import walk, remove
-    from os.path import join
     from shutil import rmtree
+    from os import walk, remove
     from threading import Thread
 
     data = next(walk(directory))
