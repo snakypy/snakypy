@@ -29,7 +29,7 @@ def create(content, file_path, force=False):
     """
 
     if not force and exists(file_path):
-        raise FileExistsError(f'>>> The file {file_path} already exists, use Force=True.')
+        raise FileExistsError(f'>>> The file {file_path} already exists, use force=True.')
     else:
         try:
             with open(file_path, 'w') as f:

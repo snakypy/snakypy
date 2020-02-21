@@ -48,7 +48,7 @@ def create(dictionary, file_path, force=False):
     if splitext(file_path)[1] != '.json':
         raise Exception('The JSON file extension was not explicit.')
     if not force and exists(file_path):
-        raise FileExistsError(f'>>> The file {file_path} already exists, use Force=True.')
+        raise FileExistsError(f'>>> The file {file_path} already exists, use force=True.')
     else:
         try:
             if type(dictionary) is dict:
