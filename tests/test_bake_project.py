@@ -23,29 +23,18 @@ lst_files = ['file.txt', 'file.json']
 
 
 def test_create_file():
-    file = 'Hello!'
+    file = 'Test'
     forced = snakypy.file.create(file, join(__tmpdir__, lst_files[0]), force=True)
     assert forced is True
     with pytest.raises(FileExistsError):
         assert snakypy.file.create(file, join(__tmpdir__, lst_files[0]), force=False)
+    snakypy.utils.cleaner(__tmpdir__, lst_files[0])
 
 
 def test_error_extension_create_json():
     content = {"Hello": "World!"}
     with pytest.raises(Exception):
         assert snakypy.json.create(content, join(__tmpdir__, lst_files[0]))
-
-
-def test_create_json_exists():
-    content = {"Hello": "World!"}
-    with pytest.raises(FileExistsError):
-        assert snakypy.json.create(content, join(__tmpdir__, lst_files[1]))
-
-
-def test_read_json_error():
-    snakypy.utils.cleaner(__tmpdir__, lst_files[1])
-    with pytest.raises(FileNotFoundError):
-        assert snakypy.json.read(join(__tmpdir__, lst_files[1]))
 
 
 def test_create_json():
@@ -67,10 +56,22 @@ def test_update_json():
     assert snakypy.json.update(join(__tmpdir__, lst_files[1]), data) is True
 
 
+def test_create_json_exists():
+    content = {"Hello": "World!"}
+    with pytest.raises(FileExistsError):
+        assert snakypy.json.create(content, join(__tmpdir__, lst_files[1]))
+
+
+def test_read_json_error():
+    snakypy.utils.cleaner(__tmpdir__, lst_files[1])
+    with pytest.raises(FileNotFoundError):
+        assert snakypy.json.read(join(__tmpdir__, lst_files[1]))
+
+
 # def test_update_json_not_found():
 #     data = snakypy.json.read(join(__tmpdir__, lst_files[1]))
 #     data['Hello'] = 'Marte!'
-#     snakypy.utilities.cleaner(__tmpdir__, lst_files[1])
+#     snakypy.utils.cleaner(__tmpdir__, lst_files[1])
 #     with pytest.raises(FileNotFoundError, Exception):
 #         assert snakypy.json.update(join(__tmpdir__, lst_files[1]), data)
 
