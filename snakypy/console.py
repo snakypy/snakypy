@@ -41,6 +41,14 @@ def entry(text, *, foreground='', background='', sgr='', jump_line='\n> '):
 
 
 def pick_options(title_, options, answer, colorful=False, index=False):
+    if not colorful:
+        FG.QUESTION = ''
+        FG.GREEN = ''
+        FG.MAGENTA = ''
+        FG.CYAN = ''
+        FG.ERROR = ''
+        FG.WARNING = ''
+
     printer(title_, '(Ctrl+C to Cancel)', foreground=FG.QUESTION)
     count = 1
     for option in options:
@@ -60,19 +68,20 @@ def pick_options(title_, options, answer, colorful=False, index=False):
         return
 
 
-def pick(title_, options, *,
+def pick(title, options, *,
          answer='Answer:',
          index=False,
          colorful=False):
 
     from sys import platform
 
-    if colorful is True and platform.startswith('win'):
-        raise Exception('>>> You cannot activate the color using Windows OS.')
+    # DEPRECATED!
+    # if colorful is True and platform.startswith('win'):
+    #     raise Exception('>>> You cannot activate the color using Windows OS.')
 
     try:
         while True:
-            option = pick_options(title_,
+            option = pick_options(title,
                                   options,
                                   answer=answer,
                                   index=index,
@@ -89,11 +98,7 @@ def billboard(text, foreground='', background=''):
     import snakypy
 
     banner = pyfiglet.figlet_format(text)
-    # denying_win(foreground, background)
-    if not foreground == '' or not background == '':
-        return snakypy.printer(banner, foreground=foreground,
-                               background=background)
-    return print(banner)
+    return snakypy.printer(banner, foreground=foreground, background=background)
 
 
 # --------------------------------------------
@@ -105,7 +110,7 @@ def billboard(text, foreground='', background=''):
 #     from snakypy.console import cmd
 #
 #     if which('figlet') is not None:
-#         return cmd(f'figlet {text}')
+#         return cmd(f'figlet {text}', verbose=True)
 #     return print(text)
 
 
