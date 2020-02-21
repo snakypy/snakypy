@@ -14,10 +14,28 @@ def verify_attr(*args):
         raise AttributeError(msg)
 
 
-@use_unix_system
+# @use_unix_system
 def printer(*args, foreground='', background='', sgr='',
             sep=' ', end='\n', file=None, flush=False):
+    """A function that allows you to print colored text on the terminal.
 
+    Keyword Arguments:
+        foreground {str} -- This named argument should optionally receive
+                            an object of class "snakypy.ansi.FG" for the foreground
+                            color of the text. This object will be text with ansi code.
+                            (default: {''})
+        background {str} -- This named argument should optionally receive
+                            an object of class "snakypy.ansi.BG" for the background
+                            color of the text. This object will be text with ansi code.
+                            (default: {''})
+        sgr {str} -- This named argument should optionally receive
+                     an object of class "snakypy.ansi.SGR" for the effect
+                     of the text. This object will be text with ansi code.
+                     (default: {''})
+        sep {str} -- Separator between printer function objects. (default: {' '})
+
+        end {str} -- Responsible for skipping a line after printing is finished. (default: {'\n'})
+    """
     verify_attr(foreground, background, sgr)
 
     lst = []
@@ -29,7 +47,7 @@ def printer(*args, foreground='', background='', sgr='',
                  sep=sep, end=end, file=file, flush=flush)
 
 
-@use_unix_system
+# @use_unix_system
 def entry(text, *, foreground='', background='', sgr='', jump_line='\n> '):
 
     verify_attr(foreground, background, sgr)
@@ -148,35 +166,26 @@ def credence(app_name, app_version, app_url, data: dict, foreground=''):
     from datetime import date
 
     try:
-        # denying_win(foreground)
 
         if type(data) is not dict:
             msg = f'>>> The function "{credence.__name__}" ' \
                   'must take a dictionary as an argument.'
             raise Exception(msg)
 
-        # print(CYAN_COLOR, f'{57 * "-"}'.center(75))
         printer(f'{57 * "-"}'.center(75), foreground=foreground)
-        # print(f'{app_name} - Version {app_version}'.center(70))
         printer(f'{app_name} - Version {app_version}'.center(70),
                 foreground=foreground)
-        # print(f'{57 * "-"}\n'.center(75))
         printer(f'{57 * "-"}\n'.center(75), foreground=foreground)
         printer(f'Credence:\n'.center(70), foreground=foreground)
         for item in data['credence']:
             for key, value in item.items():
-                # print(f'{key.title().replace("_", " ")}: {value}'.center(70))
                 printer(f'{key.title().replace("_", " ")}: {value}'.center(70),
                         foreground=foreground)
-        print()
-        # print(f'{57 * "-"}'.center(75))
+            print()
         printer(f'{57 * "-"}'.center(75), foreground=foreground)
-        # print(f'{app_name} © {date.today().year} - All Right Reserved.'.center(70))
         printer(f'{app_name} © {date.today().year} - All Right Reserved.'.center(70),
                 foreground=foreground)
-        # print(f'Home: {app_url}'.center(70))
         printer(f'Home: {app_url}'.center(70), foreground=foreground)
-        # print(f'{57 * "-"}'.center(75), NONE_SCOPE_ANSI)
         printer(f'{57 * "-"}'.center(75), foreground=foreground)
     except KeyError:
         msg = "The 'credence' key was not found." \
