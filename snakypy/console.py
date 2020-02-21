@@ -10,7 +10,7 @@ def verify_attr(*args):
         msg = 'Attribute invalid in parameter "bg". Must receive from BG class.'
         raise AttributeError(msg)
     if args[2] and args[2] not in SGR.__dict__.values():
-        msg = 'Attribute invalid in parameter "bg". Must receive from BG class.'
+        msg = 'Attribute invalid in parameter "sgr". Must receive from SGR class.'
         raise AttributeError(msg)
 
 
