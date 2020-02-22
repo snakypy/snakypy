@@ -1,3 +1,6 @@
+from functools import wraps
+
+
 def use_unix_system(func):
     """[summary]
 
@@ -9,6 +12,7 @@ def use_unix_system(func):
     """
     from sys import platform
 
+    @wraps(func)
     def wrapper(*args, **kwargs):
         # Linux: startswith('linux')
         # OS X: startswith('darwin')

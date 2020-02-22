@@ -2,7 +2,14 @@ from snakypy.tools import use_unix_system
 from snakypy.ansi import NONE, FG, BG, SGR
 
 
-def verify_attr(*args):
+def attr_foreground_background_sgr(*args):
+    """
+    Checks if the attributes of the functions that the foreground
+    and background parameters are in accordance with their respective class.
+
+    Arguments:
+        args {str} -- It receives a certain number of arguments with an ansi code value.
+    """
     if args[0] and args[0] not in FG.__dict__.values():
         msg = 'Attribute invalid in parameter "foreground". Must receive from FG class.'
         raise AttributeError(msg)
@@ -14,7 +21,7 @@ def verify_attr(*args):
         raise AttributeError(msg)
 
 
-# @use_unix_system
+@use_unix_system
 def printer(*args, foreground='', background='', sgr='',
             sep=' ', end='\n', file=None, flush=False):
     """A function that allows you to print colored text on the terminal.
@@ -36,7 +43,8 @@ def printer(*args, foreground='', background='', sgr='',
 
         end {str} -- Responsible for skipping a line after printing is finished. (default: {'\n'})
     """
-    verify_attr(foreground, background, sgr)
+
+    attr_foreground_background_sgr(foreground, background, sgr)
 
     lst = []
     for i in range(len(args)):
@@ -47,10 +55,36 @@ def printer(*args, foreground='', background='', sgr='',
                  sep=sep, end=end, file=file, flush=flush)
 
 
-# @use_unix_system
+@use_unix_system
 def entry(text, *, foreground='', background='', sgr='', jump_line='\n> '):
+    """
+    This function is derived from the input, but with the option of
+    coloring it and some different formatting.
+    Note: If you use Windows, the coloring option will not work.
 
-    verify_attr(foreground, background, sgr)
+    Arguments:
+        text {object} -- Argument must receive an object
+
+    Keyword Arguments:
+        foreground {str} -- This named argument should optionally receive
+                            an object of class "snakypy.ansi.FG" for the foreground
+                            color of the text. This object will be text with ansi code.
+                            (default: {''})
+        background {str} -- This named argument should optionally receive
+                            an object of class "snakypy.ansi.BG" for the background
+                            color of the text. This object will be text with ansi code.
+                            (default: {''})
+        sgr {str} -- This named argument should optionally receive
+                     an object of class "snakypy.ansi.SGR" for the effect
+                     of the text. This object will be text with ansi code.
+                     (default: {''})
+        jump_line {str} -- Named argument that makes the action of skipping a line
+                           and adding a greater sign to represent an arrow. You change
+                           that argument to your liking. (default: {'\n> '})
+
+    """
+
+    attr_foreground_background_sgr(foreground, background, sgr)
 
     try:
         return input(f'{NONE}{sgr}{foreground}{background}{text}{jump_line}{NONE}')
@@ -58,7 +92,7 @@ def entry(text, *, foreground='', background='', sgr='', jump_line='\n> '):
         print(f'\n{FG.WARNING} Aborted by user.{NONE}')
 
 
-def pick_options(title_, options, answer, colorful=False, index=False):
+def pick_options(title, options, answer, *, colorful=False, index=False):
     if not colorful:
         FG.QUESTION = ''
         FG.GREEN = ''
@@ -67,7 +101,7 @@ def pick_options(title_, options, answer, colorful=False, index=False):
         FG.ERROR = ''
         FG.WARNING = ''
 
-    printer(title_, '(Ctrl+C to Cancel)', foreground=FG.QUESTION)
+    printer(title, '(Ctrl+C to Cancel)', foreground=FG.QUESTION)
     count = 1
     for option in options:
         print(f'{FG.GREEN}[{count}] {FG.MAGENTA}{option}{NONE}')
@@ -86,16 +120,42 @@ def pick_options(title_, options, answer, colorful=False, index=False):
         return
 
 
-def pick(title, options, *,
+def pick(title, options: list, *,
          answer='Answer:',
          index=False,
          colorful=False):
+    """Function that creates a menu of options in the terminal.
 
-    from sys import platform
+    Arguments:
+        title {str} -- You should receive a text that will be the
+                       title or the question with meaning in the alternatives.
+        options {list} -- You should receive a list with certain elements
+                          that will be part of the menu options.
 
-    # DEPRECATED!
-    # if colorful is True and platform.startswith('win'):
-    #     raise Exception('>>> You cannot activate the color using Windows OS.')
+    Keyword Arguments:
+        answer {str} -- The text that will be shown before entering the answer.
+                        You can change to your language. (default: {'Answer:'})
+        index {bool} -- This argument for True, will return a tuple, where element 0,
+                        will be the index of the option that the user chose, and
+                        element 1 of the tuple, will be the name of the choice option.
+                        Remember that the indexing of the menu is not the same as the
+                        list of options because it starts with zero (0).
+                        (default: {False})
+        colorful {bool} -- If it has True, the menu color will be active, but it only
+                           works if it is on a UNIX system, as the color uses Ansi Color.
+                           If have Windows, no effect will appear.
+                           (default: {False})
+    """
+
+    if not type(options) is list:
+        raise TypeError('You must enter a list in the argument: options')
+
+    if len(title) == 0:
+        raise TypeError('The title cannot contain an empty element. Approached.')
+
+    for option in options:
+        if len(option) == 0:
+            raise TypeError('The list cannot contain an empty element. Approached.')
 
     try:
         while True:
@@ -112,6 +172,18 @@ def pick(title, options, *,
 
 
 def billboard(text, foreground='', background=''):
+    """[summary]
+    
+    Arguments:
+        text {[type]} -- [description]
+    
+    Keyword Arguments:
+        foreground {str} -- [description] (default: {''})
+        background {str} -- [description] (default: {''})
+    
+    Returns:
+        [type] -- [description]
+    """
     import pyfiglet
     import snakypy
 
