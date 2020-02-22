@@ -2,6 +2,7 @@
   <a href="https://github.com/snakypy/snakypy">
     <img alt="snakypy" src="https://raw.githubusercontent.com/snakypy/snakypy-static/master/logotypes/snakypy/png/snakypy.png" width="500">
   </a>
+  ![Python package](https://github.com/williamcanin/snakypy/workflows/Python%20package/badge.svg)
   <br> Snakypy - Facilitating its development. <br>
 </h1>
 
@@ -32,8 +33,8 @@
 
 To work correctly, you will first need:
 
-- [`Python`](https://python.org) (v3.8 or recent).
-- [`Pip`](https://pip.pypa.io/en/stable/) (v19.3 or recent) must be installed.
+- [`Python`](https://python.org) >= 3.8
+- [`Pip`](https://pip.pypa.io/en/stable/) >= 19.3 must be installed.
 
 ## Installing
 
