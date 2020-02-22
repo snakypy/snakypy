@@ -2,9 +2,9 @@
   <a href="https://github.com/snakypy/snakypy">
     <img alt="snakypy" src="https://raw.githubusercontent.com/snakypy/snakypy-static/master/logotypes/snakypy/png/snakypy.png" width="500">
   </a>
-  ![Python package](https://github.com/williamcanin/snakypy/workflows/Python%20package/badge.svg)
   <br> Snakypy - Facilitating its development. <br>
 </h1>
+![Python package](https://github.com/williamcanin/snakypy/workflows/Python%20package/badge.svg)
 
 <div align="center">
   <h4>
