@@ -5,6 +5,8 @@
   <br> Snakypy - Facilitating its development. <br>
 </h1>
 
+![Python package](https://github.com/williamcanin/snakypy/workflows/Python%20package/badge.svg)
+
 <div align="center">
   <h4>
     | <a href="https://snakypy.github.io">Website</a> |
@@ -32,8 +34,8 @@
 
 To work correctly, you will first need:
 
-- [`Python`](https://python.org) (v3.8 or recent).
-- [`Pip`](https://pip.pypa.io/en/stable/) (v19.3 or recent) must be installed.
+- [`Python`](https://python.org) >= 3.8
+- [`Pip`](https://pip.pypa.io/en/stable/) >= 19.3 must be installed.
 
 ## Installing
 

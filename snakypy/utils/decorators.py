@@ -1,3 +1,7 @@
+from functools import wraps
+from snakypy.utils.exceptions import NotSupportWindows
+
+
 def use_unix_system(func):
     """[summary]
 
@@ -9,16 +13,16 @@ def use_unix_system(func):
     """
     from sys import platform
 
+    @wraps(func)
     def wrapper(*args, **kwargs):
         # Linux: startswith('linux')
         # OS X: startswith('darwin')
         # Windows: startswith('win')
         if platform.startswith('win'):
-            msg = 'Invalid operating system (Windows). ' \
-                  f'This function "{func.__name__}" is compatible with ' \
-                  '"Linux" and "Mac OS X" systems only.'
-            print(msg)
-            exit(1)
+            msg = 'Invalid operating system "Windows". ' \
+                  f'This function "{func.__name__}" is only compatible with ' \
+                  'unix-based systems.'
+            raise NotSupportWindows(msg)
         return func(*args, **kwargs)
     return wrapper
 

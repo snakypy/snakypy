@@ -3,8 +3,10 @@ import snakypy.json
 import snakypy.utils
 import snakypy.console
 import snakypy.ansi
-import snakypy.tools
 import snakypy.calc
+from snakypy.utils import catch
+from snakypy.utils import stiff
+from snakypy.utils import decorators
 from snakypy.ansi import FG, BG, SGR
 from snakypy.console import printer, entry, pick
 

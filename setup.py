@@ -46,7 +46,6 @@ url = 'https://github.com/williamcanin/snakypy'
 # exec_path = 'snakypy.snakypy:Snakypy'
 # entry_points = [f' {project_exec} = {exec_path}']
 
-# NOTE: Some setup information is contained in the config.json file.
 setup(
     name=name,
     version=__version__,
