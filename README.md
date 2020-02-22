@@ -4,6 +4,7 @@
   </a>
   <br> Snakypy - Facilitating its development. <br>
 </h1>
+
 ![Python package](https://github.com/williamcanin/snakypy/workflows/Python%20package/badge.svg)
 
 <div align="center">
