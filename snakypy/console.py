@@ -1,4 +1,4 @@
-from snakypy.tools import use_unix_system
+from snakypy.utils import decorators
 from snakypy.ansi import NONE, FG, BG, SGR
 
 
@@ -21,7 +21,7 @@ def attr_foreground_background_sgr(*args):
         raise AttributeError(msg)
 
 
-@use_unix_system
+@decorators.use_unix_system
 def printer(*args, foreground='', background='', sgr='',
             sep=' ', end='\n', file=None, flush=False):
     """A function that allows you to print colored text on the terminal.
@@ -55,7 +55,7 @@ def printer(*args, foreground='', background='', sgr='',
                  sep=sep, end=end, file=file, flush=flush)
 
 
-@use_unix_system
+@decorators.use_unix_system
 def entry(text, *, foreground='', background='', sgr='', jump_line='\n> '):
     """
     This function is derived from the input, but with the option of
@@ -173,14 +173,14 @@ def pick(title, options: list, *,
 
 def billboard(text, foreground='', background=''):
     """[summary]
-    
+
     Arguments:
         text {[type]} -- [description]
-    
+
     Keyword Arguments:
         foreground {str} -- [description] (default: {''})
         background {str} -- [description] (default: {''})
-    
+
     Returns:
         [type] -- [description]
     """
