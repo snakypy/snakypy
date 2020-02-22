@@ -28,7 +28,7 @@ def test_create_file():
     assert forced is True
     with pytest.raises(FileExistsError):
         assert snakypy.file.create(file, join(__tmpdir__, lst_files[0]), force=False)
-    snakypy.utils.cleaner(__tmpdir__, lst_files[0])
+    snakypy.stiff.cleaner(__tmpdir__, lst_files[0])
 
 
 def test_error_extension_create_json():
@@ -63,7 +63,7 @@ def test_create_json_exists():
 
 
 def test_read_json_error():
-    snakypy.utils.cleaner(__tmpdir__, lst_files[1])
+    snakypy.stiff.cleaner(__tmpdir__, lst_files[1])
     with pytest.raises(FileNotFoundError):
         assert snakypy.json.read(join(__tmpdir__, lst_files[1]))
 
@@ -77,9 +77,12 @@ def test_read_json_error():
 
 
 def test_get_shell():
-    shells = ['bash', 'zsh', 'sh', 'ksh']
-    shell = snakypy.utils.get_shell()
-    assert shell in shells
+    from sys import platform
+
+    if not platform.startswith('win'):
+        shells = ['bash', 'zsh', 'sh', 'ksh']
+        shell = snakypy.catch.shell()
+        assert shell in shells
 
 
 def test_percentage():
@@ -101,7 +104,7 @@ def test_percentage():
 
 def test_file_extension():
     file = '/home/file.tar.gz'
-    assert snakypy.utils.file_extension(file) == 'tar.gz'
+    assert snakypy.catch.extension(file) == 'tar.gz'
 
 
 def test_command_real_time():
