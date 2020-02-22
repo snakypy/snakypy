@@ -41,7 +41,7 @@ def printer(*args, foreground='', background='', sgr='',
                      (default: {''})
         sep {str} -- Separator between printer function objects. (default: {' '})
 
-        end {str} -- Responsible for skipping a line after printing is finished. (default: {'\n'})
+        end {str} -- Responsible for skipping a line after printing is finished. (default: '[bar]n')
     """
 
     attr_foreground_background_sgr(foreground, background, sgr)
@@ -80,7 +80,7 @@ def entry(text, *, foreground='', background='', sgr='', jump_line='\n> '):
                      (default: {''})
         jump_line {str} -- Named argument that makes the action of skipping a line
                            and adding a greater sign to represent an arrow. You change
-                           that argument to your liking. (default: {'\n> '})
+                           that argument to your liking. (default: '[bar]n> ')
 
     """
 
@@ -224,15 +224,7 @@ def cmd(command, *args, shell=True, universal_newlines=True, ret=False, verbose=
 
 def credence(app_name, app_version, app_url, data: dict, foreground=''):
     """
-    Print project development credits. Example:
-    data = {
-        "credits": [{
-            "full_name": "William da Costa Canin",
-            "email": "william.costa.canin@gmail.com",
-            "website": "http://williamcanin.me",
-            "locale": "Brazil - SP"
-        }]
-    }
+    Print project development credits.
     """
 
     from datetime import date
