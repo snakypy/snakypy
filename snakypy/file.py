@@ -46,7 +46,7 @@ def create(content, file_path, force=False):
                         (default: {False})
 
     Returns:
-        [bool] -- If everything went well, it will return True.
+        **[bool]** -- If everything went well, it will return True.
     """
 
     if not force and exists(file_path):
