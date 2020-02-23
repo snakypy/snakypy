@@ -9,7 +9,7 @@ def cleaner(directory, *file, level=None):
     **DANGER!** A function for cleaning objects and folders on the system.
 
     Arguments:
-        **directory {str}** -- DANGER! A function for cleaning objects and folders on the system.
+        **directory {str}** -- Directory where are the files to be destroyed
 
         ***file** -- Enter an N file name number (Optional)
 
