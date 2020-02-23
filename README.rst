@@ -2,11 +2,13 @@
 Snakypy
 =======
 
+.. image:: https://github.com/snakypy/snakypy/workflows/Python%20package/badge.svg
+        :target: https://github.com/snakypy/snakypy
 
 .. image:: https://img.shields.io/pypi/v/snakypy.svg
         :target: https://pypi.python.org/pypi/snakypy
 
-.. image:: https://img.shields.io/pypi/wheel/snakypy?style=flat-square
+.. image:: https://img.shields.io/pypi/wheel/snakypy
         :alt: PyPI - Wheel
 
 .. image:: https://img.shields.io/travis/snakypy/snakypy.svg
