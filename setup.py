@@ -49,8 +49,8 @@ url = 'https://github.com/williamcanin/snakypy'
 setup(
     name=name,
     version=__version__,
-    description='Snakypy is a package that contains ready-made wheels,'
-                'and will help the developer to take shortcuts in development.',
+    description='Snakypy is a package that contains code ready to assist in the development of '
+                'packages/applications so as not to replicate the code.',
     author=__author__['name'],
     author_email=__author__['email'],
     license=license_,
@@ -71,7 +71,7 @@ setup(
                  'Operating System :: Unix',
                  'Programming Language :: Python :: 3'],
     python_requires='>= 3.8',
-    keywords='snakypy modules library package utilities',
+    keywords='snakypy modules library package',
     # entry_points={'console_scripts': entry_points},
     cmdclass={
         'develop': PostDevelopCommand,
