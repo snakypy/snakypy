@@ -3,13 +3,8 @@ from snakypy.utils.exceptions import NotSupportWindows
 
 
 def use_unix_system(func):
-    """[summary]
-
-    Arguments:
-        func {[type]} -- [description]
-
-    Returns:
-        [type] -- [description]
+    """
+    A decorator to force a function or method to run on Unix systems only.
     """
     from sys import platform
 
