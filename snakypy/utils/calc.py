@@ -12,10 +12,6 @@ class BMI:
         """
         This method will perform the body mass index calculation.
         Applied within the "calc_bmi" method.
-
-        Returns:
-            [float] -- The method returns a float after the calculation,
-                       otherwise it falls into an Exception.
         """
         try:
             w = float(self.validate_hw(self.weight, 0, 350))
@@ -26,10 +22,6 @@ class BMI:
 
     def validate_sex(self):
         """Method to validate the person's gender.
-
-        Returns:
-            [str] - Returns a one-character string, or "m" or "f", where "m" is
-                    a male and "f" is a female. If neither, it returns a false Boolean.
         """
         if self.sex == 'm' or self.sex == 'f':
             return self.sex
@@ -41,15 +33,6 @@ class BMI:
         This is a static method for validating weight and height.
         The height cannot be greater than 3 meters and neither the weight
         above 350, nor can both be zeroed or negative
-
-        Arguments:
-            hw {float} -- You will receive either height or weight
-            value1 {float} -- Will receive a minimum height, which represents zero (0)
-            value2 {float} -- Will receive a maximum weight, which represents 350.
-
-        Returns:
-            [float] -- Returns a "float" if it enters the imposed conditions.
-                       If it does not return a false Boolean value.
         """
         if float(hw) <= value1 or float(hw) > value2:
             return False
@@ -61,16 +44,6 @@ class BMI:
         The purpose of this statistical method is to receive the calculation
         of the body mass index already done, and to compare it with the
         statistical data informed in the initializer method of the class.
-
-        Arguments:
-            result_bmi {float} -- This arguments will receive the body mass index
-                                  value already performed.
-            reg {dict} -- Receive a dictionary containing the height and weight
-                          of each category
-
-        Returns:
-            [str] -- Returns a string informing the result according to the
-                     calculation obtained.
         """
         if result_bmi < reg['V1']:
             return 'Under weight.'

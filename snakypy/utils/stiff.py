@@ -5,16 +5,31 @@ from threading import Thread
 
 
 def cleaner(directory, *file, level=None):
-    """[summary]
+    """
+    **DANGER!** A function for cleaning objects and folders on the system.
 
     Arguments:
-        directory {str} -- [description]
+        **directory {str}** -- Directory where are the files to be destroyed
+
+        ***file** -- Enter an N file name number (Optional)
 
     Keyword Arguments:
-        level {int} -- [description] (default: {False})
+        **level {int}** -- This option receives 3 values, they are: \
 
-    Raises:
-        FileNotFoundError: [description]
+                           Value 0 = If this value is set, the function revokes the \
+                           unitary file exclusion option, that is, this option will \
+                           exclude all files at the root of the informed directory.
+
+                           Value 1 = If this value is set, the function revokes the unitary \
+                           file exclusion option as well, however, it will exclude all \
+                           subdirectories of the root directory, except the files contained \
+                           in the root.
+
+                           Value None = If this value is set, the function must receive at least \
+                           one file name to be deleted. Can pass as many files as you want.
+
+                           (default: {None})
+
     """
 
     data = next(walk(directory))
