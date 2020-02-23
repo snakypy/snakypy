@@ -104,7 +104,8 @@ def test_percentage():
 
 def test_file_extension():
     file = '/home/file.tar.gz'
-    assert snakypy.catch.extension(file) == 'tar.gz'
+    assert snakypy.catch.extension(file) == '.gz'
+    assert snakypy.catch.extension(file, first_dot=True) == 'tar.gz'
 
 
 def test_command_real_time():
