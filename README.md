@@ -10,6 +10,8 @@
 ![Pyup](https://pyup.io/repos/github/snakypy/snakypy/shield.svg)
 ![PyPI - Wheel](https://img.shields.io/pypi/wheel/snakypy)
 ![PyPI](https://img.shields.io/pypi/v/snakypy)
+![PyPI - Implementation](https://img.shields.io/pypi/implementation/snakypy)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/snakypy)
 ![PyPI - License](https://img.shields.io/pypi/l/snakypy)
 
 
