@@ -2,6 +2,23 @@ from os.path import exists
 
 
 def read(file_path, split=False):
+    """Reads a text file.
+
+    >>> import snakypy
+    >>> file = '/tmp/my_file.txt'
+    >>> snakypy.file.read(file)
+
+    Arguments:
+        **file_path {str}** -- You must receive the full/absolute file path.
+
+    Keyword Arguments:
+        **split {bool}** -- If this option is True, a list will be returned where \
+        the breaks will be made using line skips. (default: {False})
+
+    Returns:
+        **[str|list]** -- By default it returns a string. If the option \
+        split=True, a list of line breaks will be returned.
+    """
     try:
         with open(file_path) as f:
             if split:
