@@ -6,6 +6,7 @@
 </h1>
 
 ![Python package](https://github.com/snakypy/snakypy/workflows/Python%20package/badge.svg)
+[![Build Status](https://travis-ci.org/snakypy/snakypy.svg?branch=master)](https://travis-ci.org/snakypy/snakypy)
 ![Docs](https://readthedocs.org/projects/snakypy/badge/?version=latest)
 ![Pyup](https://pyup.io/repos/github/snakypy/snakypy/shield.svg)
 ![PyPI - Wheel](https://img.shields.io/pypi/wheel/snakypy)
