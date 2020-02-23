@@ -41,7 +41,7 @@ with open(requirements_dev) as f:
 license_ = "MIT license",
 license_classifiers = "License :: OSI Approved :: MIT License"
 name = 'snakypy'
-url = 'https://github.com/williamcanin/snakypy'
+url = 'https://github.com/snakypy/snakypy'
 # project_exec = 'snakypy'
 # exec_path = 'snakypy.snakypy:Snakypy'
 # entry_points = [f' {project_exec} = {exec_path}']
