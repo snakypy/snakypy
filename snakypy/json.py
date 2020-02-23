@@ -3,17 +3,18 @@ from os.path import exists
 
 
 def read(file_path):
-    """Function that reads JSON configuration file and returns data.
+    """
+    Function that reads JSON configuration file and returns data.
+
+    >>> import snakypy
+    >>> file = '/tmp/file.json'
+    >>> snakypy.json.read(file)
 
     Arguments:
-        file_path {[type]} -- [description]
-
-    Raises:
-        FileNotFoundError: [description]
-        Exception: [description]
+        **file_path {str}** -- You must receive the full/absolute file path.
 
     Returns:
-        [type] -- [description]
+        [dict] -- If the file is found it will return a dictionary
     """
 
     try:
@@ -27,21 +28,25 @@ def read(file_path):
 
 
 def create(dictionary, file_path, force=False):
-    """[summary]
+    """
+    Create a JSON file through a dictionary.
+
+    >>> import snakypy
+    >>> dic = {'msg': 'Hello, Snakypy!'}
+    >>> snakypy.json.create(dic, '/tmp/file.json')
+    >>> snakypy.json.create(dic, '/tmp/file.json', force=True)
 
     Arguments:
-        dictionary {[type]} -- [description]
-        file_path {[type]} -- [description]
+        **dictionary {dict}** -- [description]
+
+        **file_path {str}** -- You must receive the full/absolute file path.
 
     Keyword Arguments:
-        force {bool} -- [description] (default: {False})
-
-    Raises:
-        Exception: [description]
-        Exception: [description]
+        **force {bool}** -- Use the True option if you want to overwrite the existing file. \
+                            (default: {False})
 
     Returns:
-        [type] -- [description]
+        **[bool]** -- If everything went well, it will return True.
     """
     from os.path import splitext
 
@@ -61,19 +66,22 @@ def create(dictionary, file_path, force=False):
 
 
 def update(file_path, content: dict):
-    """Function to update json file. Receives two parameters,
-    one (file_path) is the absolute path of the JSON file to
-    be read, and the other (data) is the modified value.
+    """
+    Function to update json file. The "snakypy.json.read" function depends on
+    reading a json file.
+
+    >>> import snakypy
+    >>> data = snakypy.json.read('/tmp/file.json')
+    >>> data['msg'] = 'Olá, Snakypy!'
+    >>> snakypy.json.update('/tmp/file.json', data)
 
     Arguments:
-        file_path {[type]} -- [description]
-        content {[type]} -- [description]
+        **file_path {str}** -- You must receive the full/absolute file path.
 
-    Raises:
-        Exception: [description]
-
+        **content {dict}** -- You should receive a dictionary with the updated data \
+                              already.
     Returns:
-        [type] -- [description]
+        **[bool]** -- If everything went well, it will return True.
     """
     try:
         if type(content) is dict:
@@ -84,3 +92,6 @@ def update(file_path, content: dict):
     except Exception as err:
         msg = f'>>> Something unexpected happened while updating {file_path}'
         raise Exception(msg, err)
+
+
+__all__ = ['read', 'create']
