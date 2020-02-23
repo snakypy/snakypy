@@ -321,9 +321,9 @@ def credence(app_name, app_version, app_url, data: dict, foreground=''):
 
     .. code-block:: shell
 
-         ---------------------------------------------------------
+        ---------------------------------------------------------
                        Snakypy - Version 0.1.0
-         ---------------------------------------------------------
+        ---------------------------------------------------------
 
                               Credence:
 
@@ -336,15 +336,18 @@ def credence(app_name, app_version, app_url, data: dict, foreground=''):
                       Email: example@domain.com
                          Locale: Brazil - SP
 
-         ---------------------------------------------------------
-                 Snakypy © 2020 - All Right Reserved.
-               Home: https://github.com/snakypy/snakypy
-         ---------------------------------------------------------
+        ---------------------------------------------------------
+                    Snakypy © 2020 - All Right Reserved.
+                Home: https://github.com/snakypy/snakypy
+        ---------------------------------------------------------
 
     Arguments:
         app_name {str} -- Put application name.
+
         app_version {str} -- Application version.
+
         app_url {str} -- Application or website url.
+
         data {dict} -- You must receive a dictionary containing a key called "credence".
                        E.g: data = {'credence': []}
 
