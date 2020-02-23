@@ -12,10 +12,10 @@ def return_ansi_or_not(value):
     color in Ansi.
 
     Arguments:
-        value {str} -- Receives a string in the form of Ansi color.
+        **value {str}** -- Receives a string in the form of Ansi color.
 
     Returns:
-        [str] -- It will return an Ansi scape code, or an empty string.
+        **[str]** -- It will return an Ansi scape code, or an empty string.
     """
     if sys.platform.startswith('win'):
         return ''
