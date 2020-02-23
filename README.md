@@ -27,7 +27,7 @@
 </div>
 <br>
 
-`Snakypy` is a package that contains ready-made wheels, and will help the developer to take shortcuts in development.
+`Snakypy` is a package that contains code ready to assist in the development of packages/applications so as not to replicate the code.
 ## Features
 
 ## Requirements
