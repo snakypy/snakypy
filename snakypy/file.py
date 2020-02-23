@@ -29,20 +29,24 @@ def read(file_path, split=False):
 
 
 def create(content, file_path, force=False):
-    """[summary]
+    """
+    Create a text file.
+
+    >>> import snakypy
+    >>> snakypy.file.create('My file', '/tmp/file.txt')
+    >>> snakypy.file.create('My file', '/tmp/file.txt', force=True)
 
     Arguments:
-        content {[type]} -- [description]
-        file_path {[type]} -- [description]
+        **content {str}** -- Reports a text or an object containing a text.
+
+        **file_path {str}** -- You must receive the full/absolute file path.
 
     Keyword Arguments:
-        force {bool} -- [description] (default: {False})
-
-    Raises:
-        Exception: [description]
+        **force {bool}** -- Use the True option if you want to overwrite the existing file. \
+                        (default: {False})
 
     Returns:
-        [type] -- [description]
+        [bool] -- If everything went well, it will return True.
     """
 
     if not force and exists(file_path):
