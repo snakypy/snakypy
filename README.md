@@ -5,8 +5,8 @@
   <br> Snakypy - Facilitating its development. <br>
 </h1>
 
-![Python package](https://github.com/snakypy/snakypy/workflows/Python%20package/badge.svg) \
-![PyPI](https://img.shields.io/pypi/v/snakypy) \
+![Python package](https://github.com/snakypy/snakypy/workflows/Python%20package/badge.svg)
+![PyPI](https://img.shields.io/pypi/v/snakypy)
 
 
 <div align="center">
