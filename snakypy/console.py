@@ -210,7 +210,7 @@ def pick(title, options: list, *,
         raise Exception('An unexpected error occurs when using pick')
 
 
-def billboard(text, foreground='', background=''):
+def billboard(text, foreground='', background='', ret_text=False):
     """
     Creates a Billboard in the terminal.
 
@@ -233,6 +233,9 @@ def billboard(text, foreground='', background=''):
                             color of the text. This object will be text with ansi code. \
                             (default: '')
 
+        **ret_text {bool}** -- Receives a Boolean value. If the value is True, it will only \
+                               return the text. If the value is False, it will resume printing.
+
     Returns:
         **[str]** -- The text informed in billboard form.
     """
@@ -240,6 +243,8 @@ def billboard(text, foreground='', background=''):
     import snakypy
 
     banner = pyfiglet.figlet_format(text)
+    if ret_text:
+        return banner
     return snakypy.printer(banner, foreground=foreground, background=background)
 
 
