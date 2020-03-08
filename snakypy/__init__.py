@@ -1,4 +1,5 @@
 import snakypy.file
+import snakypy.path
 import snakypy.json
 import snakypy.utils
 import snakypy.console
@@ -17,4 +18,4 @@ __author__ = {
     'website': 'https://snakypy.github.io',
     'github': 'https://github.com/snakypy'
 }
-__version__ = '0.1.1'
+__version__ = '0.2.1'
