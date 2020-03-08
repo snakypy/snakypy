@@ -51,6 +51,14 @@ snakypy.json module
    :undoc-members:
    :show-inheritance:
 
+snakypy.path module
+-------------------
+
+.. automodule:: snakypy.path
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 
 Module contents
 ---------------
