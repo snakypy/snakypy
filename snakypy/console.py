@@ -109,7 +109,7 @@ def entry(text, *, foreground='', background='', sgr='', jump_line='\n> '):
         print(f'\n{FG.WARNING} Aborted by user.{NONE}')
 
 
-def pick_options(title, options, answer, *, colorful=False, index=False):
+def pick_options(title, options, answer, *, colorful=False, index=False, lowercase=False):
     if not colorful:
         FG.QUESTION = ''
         FG.GREEN = ''
@@ -126,9 +126,13 @@ def pick_options(title, options, answer, *, colorful=False, index=False):
     try:
         pos = int(input(f'{FG.CYAN}{answer} {NONE}')) - 1
         assert pos > -1
-        if index:
+        if index and lowercase:
             return pos, options[pos].lower()
-        return options[pos].lower()
+        elif index and not lowercase:
+            return pos, options[pos]
+        if lowercase:
+            return options[pos].lower()
+        return options[pos]
     except Exception:
         printer('Option invalid!', foreground=FG.ERROR)
         return False
@@ -140,13 +144,14 @@ def pick_options(title, options, answer, *, colorful=False, index=False):
 def pick(title, options: list, *,
          answer='Answer:',
          index=False,
-         colorful=False):
+         colorful=False,
+         lowercase=False):
     """Function that creates a menu of options in the terminal.
 
     >>> from snakypy import pick
     >>> title = 'What is your favorite programming language?'
     >>> options = ['C', 'C++', 'Java', 'Javascript', 'Python', 'Ruby']
-    >>> pick(title, options)
+    >>> pick(title, options, lowercase=True)
 
     **output:**
 
@@ -184,6 +189,9 @@ def pick(title, options: list, *,
                            works if it is on a UNIX system, as the color uses Ansi Color. \
                            If have Windows, no effect will appear. \
                            (default: {False})
+
+        **lowercase {bool}** -- If set to True, the text value returned from the chosen \
+                            option will be lowercase.
     """
 
     if not type(options) is list:
