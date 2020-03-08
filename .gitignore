@@ -137,3 +137,6 @@ dmypy.json
 
 # Tests
 tests/.tmp/
+
+# Ignore files Poetry
+poetry.lock
