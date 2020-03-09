@@ -1,6 +1,6 @@
 <h1 align="center">
   <a href="https://github.com/snakypy/snakypy">
-    <img alt="snakypy" src="https://raw.githubusercontent.com/snakypy/snakypy-static/master/logotypes/snakypy/png/snakypy.png" width="500">
+    <img alt="snakypy" src="https://raw.githubusercontent.com/snakypy/snakypy-static/master/snakypy/logo/png/snakypy.png" width="500">
   </a>
   <br> Snakypy - Facilitating its development. <br>
 </h1>
