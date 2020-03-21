@@ -144,6 +144,7 @@ def test_rmdir_blank():
     snakypy.utils.os.rmdir_blank(__tmpdir__)
     assert os.path.isdir(paths[0]) is False
 
+
 class TestBakeProject(TestCase):
 
     @patch('snakypy.console.pick', return_value='python')
