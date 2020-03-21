@@ -21,7 +21,7 @@ def attr_foreground_background_sgr(*args):
         raise AttributeError(msg)
 
 
-# @decorators.use_unix_system
+@decorators.denying_os("nt")
 def printer(*args, foreground='', background='', sgr='',
             sep=' ', end='\n', file=None, flush=False):
     """A function that allows you to print colored text on the terminal.
@@ -63,7 +63,7 @@ def printer(*args, foreground='', background='', sgr='',
                  sep=sep, end=end, file=file, flush=flush)
 
 
-# @decorators.use_unix_system
+@decorators.denying_os("nt")
 def entry(text, *, foreground='', background='', sgr='', jump_line='\n> '):
     """
     This function is derived from the input, but with the option of

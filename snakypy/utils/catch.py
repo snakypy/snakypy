@@ -2,7 +2,7 @@ from subprocess import check_output
 from snakypy.utils import decorators
 
 
-@decorators.use_unix_system
+@decorators.only_for_linux
 def shell():
     """
     Function to get the currently activated shell.

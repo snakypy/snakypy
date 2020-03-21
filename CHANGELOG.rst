@@ -27,3 +27,8 @@ Changelog
 * Adding function to clean directory with empty folders in the "utils.os" module
 * Correcting error in the "create" function of the "path" module.
 * Condition correction in the "use_unix_system" decorator.
+
+0.3.2 (2020-03-22)
+------------------
+
+* Correcting some errors

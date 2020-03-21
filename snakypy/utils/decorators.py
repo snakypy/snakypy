@@ -1,45 +1,39 @@
+import os
 from functools import wraps
-from snakypy.utils.exceptions import NotSupportWindows
 
 
-def use_unix_system(func):
+def denying_os(os_name):
+    """Decorator to ban an operating system from software through os.name.
+
+    Arguments:
+        
+        **os_name** {str} - You must receive the os.name of the operating system to be banned.
+                            Windows = nt
+                            Linux/Mac OS = posix
     """
-    A decorator to force a function or method to run on Unix systems only.
-    """
-    from sys import platform
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        if os.name == os_name:
+            msg = f"This software is not compatible with this ({os_name}) operating system."
+            raise Exception(msg)
+        return func(*args, **kwargs)
+
+    return wrapper
+
+
+def only_for_linux(func):
+    """A decorator to force a function or method to run on Unix systems only."""
+    import platform
 
     @wraps(func)
     def wrapper(*args, **kwargs):
-        # Linux: startswith('linux')
-        # OS X: startswith('darwin')
-        # Windows 64: startswith('win')
-        # Windows 32: startswith('win32')
-        if not platform.startswith('linux'):
+        if not platform.system() == "Linux":
             msg = 'Invalid operating system. ' \
                   f'This function "{func.__name__}" is only compatible with ' \
                   'Linux systems.'
-            raise NotSupportWindows(msg)
+            raise Exception(msg)
         return func(*args, **kwargs)
     return wrapper
 
 
-# DEPRECATED!
-# def denying_win(*args, os='win'):
-#     from sys import platform
-#
-#     # Linux: 'linux'
-#     # OS X: 'darwin'
-#     # Windows: 'win'
-#
-#     if args:
-#         if (args != '') and platform.startswith(os):
-#             raise Exception('>>> You cannot activate the color using Windows OS.')
-#     else:
-#         if platform.startswith(os):
-#             msg = 'Invalid operating system (Windows). ' \
-#                   f'This function "{__name__}" is compatible with ' \
-#                   '"Linux" and "Mac OS X" systems only.'
-#             raise Exception(msg)
-
-
-__all__ = ['use_unix_system']
+__all__ = ["only_for_linux", "denying_os"]

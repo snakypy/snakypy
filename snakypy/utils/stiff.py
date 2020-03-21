@@ -8,6 +8,13 @@ def cleaner(directory, *file, level=None):
     """
     **DANGER!** A function for cleaning objects and folders on the system.
 
+    E.g:
+
+    >>> import snakypy
+    >>> snakypy.stiff.cleaner("/tmp/foo", level=0)
+    >>> snakypy.stiff.cleaner("/tmp/foo", level=1)
+    >>> snakypy.stiff.cleaner("/tmp/foo", "bar.txt")
+
     Arguments:
         **directory {str}** -- Directory where are the files to be destroyed
 
