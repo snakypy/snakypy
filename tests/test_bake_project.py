@@ -137,6 +137,13 @@ def test_imc():
     assert result is False
 
 
+def test_rmdir_blank():
+    paths = (os.path.join(__tmpdir__, "foo"), os.path.join(__tmpdir__, "bar"))
+    snakypy.path.create(multidir=paths)
+    assert os.path.isdir(paths[0]) is True
+    snakypy.utils.os.rmdir_blank(__tmpdir__)
+    assert os.path.isdir(paths[0]) is False
+
 class TestBakeProject(TestCase):
 
     @patch('snakypy.console.pick', return_value='python')
