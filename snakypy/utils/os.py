@@ -6,7 +6,7 @@ def rmdir_blank(path):
     certain path."""
     for r, d, f in os.walk(path, topdown=False):
         for folder in d:
-            if len(os.listdir(join(r, folder))) == 0:
+            if len(os.listdir(os.path.join(r, folder))) == 0:
                 try:
                     os.rmdir(os.path.join(r, folder))
                 except PermissionError:
