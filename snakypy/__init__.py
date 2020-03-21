@@ -19,4 +19,4 @@ __author__ = {
     'website': 'https://snakypy.github.io',
     'github': 'https://github.com/snakypy'
 }
-__version__ = '0.3.2'
+__version__ = '0.3.3'
