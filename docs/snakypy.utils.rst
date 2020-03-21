@@ -36,6 +36,14 @@ snakypy.utils.exceptions module
    :undoc-members:
    :show-inheritance:
 
+snakypy.utils.os module
+-----------------------
+
+.. automodule:: snakypy.utils.os
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 snakypy.utils.stiff module
 --------------------------
 
