@@ -5,8 +5,8 @@ class BMI:
         self.sex = sex
         self.weight = weight
         self.height = height
-        self.reg_male = {'V1': 20.7, 'V2': 26.4, 'V3': 27.8, 'V4': 31.1}
-        self.reg_female = {'V1': 19.1, 'V2': 25.8, 'V3': 27.3, 'V4': 32.3}
+        self.reg_male = {"V1": 20.7, "V2": 26.4, "V3": 27.8, "V4": 31.1}
+        self.reg_female = {"V1": 19.1, "V2": 25.8, "V3": 27.3, "V4": 32.3}
 
     def calc_bmi(self):
         """
@@ -23,7 +23,7 @@ class BMI:
     def validate_sex(self):
         """Method to validate the person's gender.
         """
-        if self.sex == 'm' or self.sex == 'f':
+        if self.sex == "m" or self.sex == "f":
             return self.sex
         return False
 
@@ -45,21 +45,21 @@ class BMI:
         of the body mass index already done, and to compare it with the
         statistical data informed in the initializer method of the class.
         """
-        if result_bmi < reg['V1']:
-            return 'Under weight.'
-        elif reg['V1'] <= result_bmi < reg['V2']:
-            return 'Normal weight.'
-        elif reg['V2'] <= result_bmi < reg['V3']:
-            return 'Marginally overweight.'
-        elif reg['V3'] <= result_bmi < reg['V4']:
-            return 'Overweight.'
-        elif result_bmi > reg['V4']:
-            return 'Obesity.'
+        if result_bmi < reg["V1"]:
+            return "Under weight."
+        elif reg["V1"] <= result_bmi < reg["V2"]:
+            return "Normal weight."
+        elif reg["V2"] <= result_bmi < reg["V3"]:
+            return "Marginally overweight."
+        elif reg["V3"] <= result_bmi < reg["V4"]:
+            return "Overweight."
+        elif result_bmi > reg["V4"]:
+            return "Obesity."
 
     def main(self):
         if self.calc_bmi():
-            if self.validate_sex() == 'm':
+            if self.validate_sex() == "m":
                 return self.reply(self.calc_bmi(), self.reg_male)
-            elif self.validate_sex() == 'f':
+            elif self.validate_sex() == "f":
                 return self.reply(self.calc_bmi(), self.reg_female)
         return False

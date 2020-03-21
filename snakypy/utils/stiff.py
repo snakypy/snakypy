@@ -62,8 +62,8 @@ def cleaner(directory, *file, level=None):
                 remove(join(data[0], f))
             return
     except FileNotFoundError as err:
-        msg = '>>> There was an error removing the files'
+        msg = ">>> There was an error removing the files"
         raise FileNotFoundError(msg, err)
 
 
-__all__ = ['cleaner']
+__all__ = ["cleaner"]

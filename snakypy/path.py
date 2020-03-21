@@ -26,8 +26,10 @@ def create(*args, multidir=()):
                 path = Path(directory)
                 path.mkdir(parents=True, exist_ok=True)
     except TypeError:
-        raise TypeError(">>> Invalid type. You should receive only one argument at a time.")
-    except:
+        raise TypeError(
+            ">>> Invalid type. You should receive only one argument at a time."
+        )
+    except Exception:
         raise Exception(f">>> An error occurred while creating directory: {args}")
 
     try:
@@ -38,5 +40,5 @@ def create(*args, multidir=()):
                 path.mkdir(parents=True, exist_ok=True)
     except TypeError:
         raise TypeError(f">>> You should receive a tuple.")
-    except:
+    except Exception:
         raise Exception(f">>> There was an error creating directories: {multidir}")

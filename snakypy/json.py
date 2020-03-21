@@ -22,9 +22,9 @@ def read(file_path):
             data = json.load(f)
         return data
     except FileNotFoundError as err:
-        raise FileNotFoundError(f'>>> File not found {err}')
+        raise FileNotFoundError(f">>> File not found {err}")
     except Exception:
-        raise Exception(f'>>> There was an error reading the file: {file_path}')
+        raise Exception(f">>> There was an error reading the file: {file_path}")
 
 
 def create(dictionary, file_path, force=False):
@@ -50,19 +50,21 @@ def create(dictionary, file_path, force=False):
     """
     from os.path import splitext
 
-    if splitext(file_path)[1] != '.json':
-        raise Exception('The JSON file extension was not explicit.')
+    if splitext(file_path)[1] != ".json":
+        raise Exception("The JSON file extension was not explicit.")
     if not force and exists(file_path):
-        raise FileExistsError(f'>>> The file {file_path} already exists, use force=True.')
+        raise FileExistsError(
+            f">>> The file {file_path} already exists, use force=True."
+        )
     else:
         try:
             if type(dictionary) is dict:
-                with open(file_path, 'w') as f:
-                    json.dump(dictionary, f, indent=4, separators=(',', ': '))
+                with open(file_path, "w") as f:
+                    json.dump(dictionary, f, indent=4, separators=(",", ": "))
                     return True
             return False
         except Exception as err:
-            raise Exception(f'>>> There was an error creating the file. {err}')
+            raise Exception(f">>> There was an error creating the file. {err}")
 
 
 def update(file_path, content: dict):
@@ -85,13 +87,13 @@ def update(file_path, content: dict):
     """
     try:
         if type(content) is dict:
-            with open(file_path, 'w') as f:
-                json.dump(content, f, indent=2, separators=(',', ': '))
+            with open(file_path, "w") as f:
+                json.dump(content, f, indent=2, separators=(",", ": "))
             return True
         return False
     except Exception as err:
-        msg = f'>>> Something unexpected happened while updating {file_path}'
+        msg = f">>> Something unexpected happened while updating {file_path}"
         raise Exception(msg, err)
 
 
-__all__ = ['read', 'create']
+__all__ = ["read", "create"]

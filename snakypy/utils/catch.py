@@ -23,9 +23,9 @@ def shell():
 
     from sys import platform
 
-    if not platform.startswith('win'):
+    if not platform.startswith("win"):
         s = check_output("echo $0", shell=True, universal_newlines=True)
-        lst = s.strip('\n').strip('').split('/')
+        lst = s.strip("\n").strip("").split("/")
         return lst[2]
 
 
@@ -59,17 +59,19 @@ def extension(filename, first_dot=False):
 
     if first_dot:
         import re
-        m = re.search(r'(?<=[^/\\]\.).*$', filename)
+
+        m = re.search(r"(?<=[^/\\]\.).*$", filename)
         if not m:
             return None
         ext = m.group(0)
         return ext
     else:
         from os.path import splitext
+
         ext = splitext(filename)[1]
         if ext:
             return ext
         return None
 
 
-__all__ = ['shell', 'extension']
+__all__ = ["shell", "extension"]

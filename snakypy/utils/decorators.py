@@ -6,11 +6,11 @@ def denying_os(os_name):
     """Decorator to ban an operating system from software through os.name.
 
     Arguments:
-        
         **os_name** {str} - You must receive the os.name of the operating system to be banned.
                             Windows = nt
                             Linux/Mac OS = posix
     """
+
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
@@ -31,11 +31,14 @@ def only_for_linux(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         if not platform.system() == "Linux":
-            msg = 'Invalid operating system. ' \
-                  f'This function "{func.__name__}" is only compatible with ' \
-                  'Linux systems.'
+            msg = (
+                "Invalid operating system. "
+                f'This function "{func.__name__}" is only compatible with '
+                "Linux systems."
+            )
             raise Exception(msg)
         return func(*args, **kwargs)
+
     return wrapper
 
 

@@ -17,12 +17,12 @@ def return_ansi_or_not(value):
     Returns:
         **[str]** -- It will return an Ansi scape code, or an empty string.
     """
-    if sys.platform.startswith('win'):
-        return ''
+    if sys.platform.startswith("win"):
+        return ""
     return value
 
 
-NONE = return_ansi_or_not('\x1b[0m')
+NONE = return_ansi_or_not("\x1b[0m")
 """Variable to reset Ansi color settings."""
 
 
@@ -32,19 +32,19 @@ class FG:
     the global variables below to be applied in texts.
     """
 
-    BLACK = return_ansi_or_not('\x1b[30m')
-    MAGENTA = return_ansi_or_not('\x1b[95m')
-    BLUE = return_ansi_or_not('\x1b[94m')
-    GREEN = return_ansi_or_not('\x1b[92m')
-    RED = return_ansi_or_not('\x1b[91m')
-    YELLOW = return_ansi_or_not('\x1b[93m')
-    CYAN = return_ansi_or_not('\x1b[96m')
-    WHITE = return_ansi_or_not('\x1b[97m')
+    BLACK = return_ansi_or_not("\x1b[30m")
+    MAGENTA = return_ansi_or_not("\x1b[95m")
+    BLUE = return_ansi_or_not("\x1b[94m")
+    GREEN = return_ansi_or_not("\x1b[92m")
+    RED = return_ansi_or_not("\x1b[91m")
+    YELLOW = return_ansi_or_not("\x1b[93m")
+    CYAN = return_ansi_or_not("\x1b[96m")
+    WHITE = return_ansi_or_not("\x1b[97m")
 
-    WARNING = return_ansi_or_not(f'{YELLOW}⚠ ')
-    ERROR = return_ansi_or_not(f'{RED}✖ ')
-    FINISH = return_ansi_or_not(f'{GREEN}✔ ')
-    QUESTION = return_ansi_or_not(f'{CYAN}➜ ')
+    WARNING = return_ansi_or_not(f"{YELLOW}⚠ ")
+    ERROR = return_ansi_or_not(f"{RED}✖ ")
+    FINISH = return_ansi_or_not(f"{GREEN}✔ ")
+    QUESTION = return_ansi_or_not(f"{CYAN}➜ ")
 
 
 class BG:
@@ -53,19 +53,19 @@ class BG:
     of the global variables below to be applied in texts.
     """
 
-    BLACK = return_ansi_or_not('\x1b[40m')
-    MAGENTA = return_ansi_or_not('\x1b[105m')
-    BLUE = return_ansi_or_not('\x1b[104m')
-    GREEN = return_ansi_or_not('\x1b[102m')
-    RED = return_ansi_or_not('\x1b[101m')
-    YELLOW = return_ansi_or_not('\x1b[103m')
-    CYAN = return_ansi_or_not('\x1b[106m')
-    WHITE = return_ansi_or_not('\x1b[107m')
+    BLACK = return_ansi_or_not("\x1b[40m")
+    MAGENTA = return_ansi_or_not("\x1b[105m")
+    BLUE = return_ansi_or_not("\x1b[104m")
+    GREEN = return_ansi_or_not("\x1b[102m")
+    RED = return_ansi_or_not("\x1b[101m")
+    YELLOW = return_ansi_or_not("\x1b[103m")
+    CYAN = return_ansi_or_not("\x1b[106m")
+    WHITE = return_ansi_or_not("\x1b[107m")
 
-    WARNING = return_ansi_or_not(f'{YELLOW}⚠ ')
-    ERROR = return_ansi_or_not(f'{RED}✖ ')
-    FINISH = return_ansi_or_not(f'{GREEN}✔ ')
-    QUESTION = return_ansi_or_not(f'{CYAN}➜ ')
+    WARNING = return_ansi_or_not(f"{YELLOW}⚠ ")
+    ERROR = return_ansi_or_not(f"{RED}✖ ")
+    FINISH = return_ansi_or_not(f"{GREEN}✔ ")
+    QUESTION = return_ansi_or_not(f"{CYAN}➜ ")
 
 
 class SGR:
@@ -73,12 +73,12 @@ class SGR:
     SGR class that receives effects for text such as underline, blink, etc.
     """
 
-    BOLD = return_ansi_or_not('\x1b[1m')
-    ITALIC = return_ansi_or_not('\x1b[3m')
-    UNDERLINE = return_ansi_or_not('\x1b[4m')
-    SLOW_BLINK = return_ansi_or_not('\x1b[5m')
-    RAPID_BLINK = return_ansi_or_not('\x1b[6m')
-    REVERSE_COLOR = return_ansi_or_not('\x1b[7m')
+    BOLD = return_ansi_or_not("\x1b[1m")
+    ITALIC = return_ansi_or_not("\x1b[3m")
+    UNDERLINE = return_ansi_or_not("\x1b[4m")
+    SLOW_BLINK = return_ansi_or_not("\x1b[5m")
+    RAPID_BLINK = return_ansi_or_not("\x1b[6m")
+    REVERSE_COLOR = return_ansi_or_not("\x1b[7m")
 
 
-__all__ = ['NONE', 'FG', 'BG', 'SGR']
+__all__ = ["NONE", "FG", "BG", "SGR"]

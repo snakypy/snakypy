@@ -77,16 +77,16 @@ def percentage(per, whole, *, operation=None, log=False):
     """
 
     option = {
-        '+': lambda: whole + (whole * (per / 100)),
-        '-': lambda: whole - (whole * (per / 100))
+        "+": lambda: whole + (whole * (per / 100)),
+        "-": lambda: whole - (whole * (per / 100)),
     }.get(operation, lambda: whole * (per / 100))()
     if log:
-        if operation == '+':
-            return f'>> {whole} + {per}% = {option:.2f}'
-        elif operation == '-':
-            return f'>> {whole} - {per}% = {option:.2f}'
-        return f'>> {per}% of {whole} = {option:.2f}'
+        if operation == "+":
+            return f">> {whole} + {per}% = {option:.2f}"
+        elif operation == "-":
+            return f">> {whole} - {per}% = {option:.2f}"
+        return f">> {per}% of {whole} = {option:.2f}"
     return option
 
 
-__all__ = ['bmi', 'percentage']
+__all__ = ["bmi", "percentage"]

@@ -14,9 +14,9 @@ from snakypy.console import printer, entry, pick
 
 
 __author__ = {
-    'name': 'Snakypy Org',
-    'email': 'contact.snakypy@gmail.com',
-    'website': 'https://snakypy.github.io',
-    'github': 'https://github.com/snakypy'
+    "name": "Snakypy Org",
+    "email": "contact.snakypy@gmail.com",
+    "website": "https://snakypy.github.io",
+    "github": "https://github.com/snakypy",
 }
-__version__ = '0.3.3'
+__version__ = "0.3.3"

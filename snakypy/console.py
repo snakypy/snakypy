@@ -22,8 +22,16 @@ def attr_foreground_background_sgr(*args):
 
 
 @decorators.denying_os("nt")
-def printer(*args, foreground='', background='', sgr='',
-            sep=' ', end='\n', file=None, flush=False):
+def printer(
+    *args,
+    foreground="",
+    background="",
+    sgr="",
+    sep=" ",
+    end="\n",
+    file=None,
+    flush=False,
+):
     """A function that allows you to print colored text on the terminal.
 
     >>> from snakypy import printer, FG, BG, SGR
@@ -57,14 +65,19 @@ def printer(*args, foreground='', background='', sgr='',
     lst = []
     for i in range(len(args)):
         lst.append(args[i])
-    text = ' '.join(map(str, lst))
+    text = " ".join(map(str, lst))
 
-    return print(f'{NONE}{sgr}{foreground}{background}{text}{NONE}',
-                 sep=sep, end=end, file=file, flush=flush)
+    return print(
+        f"{NONE}{sgr}{foreground}{background}{text}{NONE}",
+        sep=sep,
+        end=end,
+        file=file,
+        flush=flush,
+    )
 
 
 @decorators.denying_os("nt")
-def entry(text, *, foreground='', background='', sgr='', jump_line='\n> '):
+def entry(text, *, foreground="", background="", sgr="", jump_line="\n> "):
     """
     This function is derived from the input, but with the option of
     coloring it and some different formatting.
@@ -104,27 +117,29 @@ def entry(text, *, foreground='', background='', sgr='', jump_line='\n> '):
     attr_foreground_background_sgr(foreground, background, sgr)
 
     try:
-        return input(f'{NONE}{sgr}{foreground}{background}{text}{jump_line}{NONE}')
+        return input(f"{NONE}{sgr}{foreground}{background}{text}{jump_line}{NONE}")
     except KeyboardInterrupt:
-        print(f'\n{FG.WARNING} Aborted by user.{NONE}')
+        print(f"\n{FG.WARNING} Aborted by user.{NONE}")
 
 
-def pick_options(title, options, answer, *, colorful=False, index=False, lowercase=False):
+def pick_options(
+    title, options, answer, *, colorful=False, index=False, lowercase=False
+):
     if not colorful:
-        FG.QUESTION = ''
-        FG.GREEN = ''
-        FG.MAGENTA = ''
-        FG.CYAN = ''
-        FG.ERROR = ''
-        FG.WARNING = ''
+        FG.QUESTION = ""
+        FG.GREEN = ""
+        FG.MAGENTA = ""
+        FG.CYAN = ""
+        FG.ERROR = ""
+        FG.WARNING = ""
 
-    printer(title, '(Ctrl+C to Cancel)', foreground=FG.QUESTION)
+    printer(title, "(Ctrl+C to Cancel)", foreground=FG.QUESTION)
     count = 1
     for option in options:
-        print(f'{FG.GREEN}[{count}] {FG.MAGENTA}{option}{NONE}')
+        print(f"{FG.GREEN}[{count}] {FG.MAGENTA}{option}{NONE}")
         count += 1
     try:
-        pos = int(input(f'{FG.CYAN}{answer} {NONE}')) - 1
+        pos = int(input(f"{FG.CYAN}{answer} {NONE}")) - 1
         assert pos > -1
         if index and lowercase:
             return pos, options[pos].lower()
@@ -134,18 +149,22 @@ def pick_options(title, options, answer, *, colorful=False, index=False, lowerca
             return options[pos].lower()
         return options[pos]
     except Exception:
-        printer('Option invalid!', foreground=FG.ERROR)
+        printer("Option invalid!", foreground=FG.ERROR)
         return False
     except KeyboardInterrupt:
-        printer('Canceled by user.', foreground=FG.WARNING)
+        printer("Canceled by user.", foreground=FG.WARNING)
         return
 
 
-def pick(title, options: list, *,
-         answer='Answer:',
-         index=False,
-         colorful=False,
-         lowercase=False):
+def pick(
+    title,
+    options: list,
+    *,
+    answer="Answer:",
+    index=False,
+    colorful=False,
+    lowercase=False,
+):
     """Function that creates a menu of options in the terminal.
 
     >>> from snakypy import pick
@@ -195,30 +214,28 @@ def pick(title, options: list, *,
     """
 
     if not type(options) is list:
-        raise TypeError('You must enter a list in the argument: options')
+        raise TypeError("You must enter a list in the argument: options")
 
     if len(title) == 0:
-        raise TypeError('The title cannot contain an empty element. Approached.')
+        raise TypeError("The title cannot contain an empty element. Approached.")
 
     for option in options:
         if len(option) == 0:
-            raise TypeError('The list cannot contain an empty element. Approached.')
+            raise TypeError("The list cannot contain an empty element. Approached.")
 
     try:
         while True:
-            option = pick_options(title,
-                                  options,
-                                  answer=answer,
-                                  index=index,
-                                  colorful=colorful)
+            option = pick_options(
+                title, options, answer=answer, index=index, colorful=colorful
+            )
             if option or option is None:
                 break
         return option
     except Exception:
-        raise Exception('An unexpected error occurs when using pick')
+        raise Exception("An unexpected error occurs when using pick")
 
 
-def billboard(text, foreground='', background='', ret_text=False):
+def billboard(text, foreground="", background="", ret_text=False):
     """
     Creates a Billboard in the terminal.
 
@@ -298,17 +315,18 @@ def cmd(command, *args, shell=True, universal_newlines=True, ret=False, verbose=
     """
     from subprocess import Popen, PIPE
 
-    process = Popen(command, shell=shell, stdout=PIPE,
-                    universal_newlines=universal_newlines)
+    process = Popen(
+        command, shell=shell, stdout=PIPE, universal_newlines=universal_newlines
+    )
     if verbose:
-        for line in iter(process.stdout.readline, ''):
+        for line in iter(process.stdout.readline, ""):
             print(NONE, *args, line.rstrip(), NONE)
     if ret:
         r = process.poll()
         return r
 
 
-def credence(app_name, app_version, app_url, data: dict, foreground=''):
+def credence(app_name, app_version, app_url, data: dict, foreground=""):
     """
     Print project development credits.
 
@@ -376,32 +394,39 @@ def credence(app_name, app_version, app_url, data: dict, foreground=''):
     try:
 
         if type(data) is not dict:
-            msg = f'>>> The function "{credence.__name__}" ' \
-                  'must take a dictionary as an argument.'
+            msg = (
+                f'>>> The function "{credence.__name__}" '
+                "must take a dictionary as an argument."
+            )
             raise Exception(msg)
 
         printer(f'{57 * "-"}'.center(75), foreground=foreground)
-        printer(f'{app_name} - Version {app_version}'.center(70),
-                foreground=foreground)
+        printer(f"{app_name} - Version {app_version}".center(70), foreground=foreground)
         printer(f'{57 * "-"}\n'.center(75), foreground=foreground)
-        printer(f'Credence:\n'.center(70), foreground=foreground)
-        for item in data['credence']:
+        printer(f"Credence:\n".center(70), foreground=foreground)
+        for item in data["credence"]:
             for key, value in item.items():
-                printer(f'{key.title().replace("_", " ")}: {value}'.center(70),
-                        foreground=foreground)
+                printer(
+                    f'{key.title().replace("_", " ")}: {value}'.center(70),
+                    foreground=foreground,
+                )
             print()
         printer(f'{57 * "-"}'.center(75), foreground=foreground)
-        printer(f'{app_name} © {date.today().year} - All Right Reserved.'.center(70),
-                foreground=foreground)
-        printer(f'Home: {app_url}'.center(70), foreground=foreground)
+        printer(
+            f"{app_name} © {date.today().year} - All Right Reserved.".center(70),
+            foreground=foreground,
+        )
+        printer(f"Home: {app_url}".center(70), foreground=foreground)
         printer(f'{57 * "-"}'.center(75), foreground=foreground)
     except KeyError:
-        msg = "The 'credence' key was not found." \
-              "Enter a dictionary containing a 'credits' key."
+        msg = (
+            "The 'credence' key was not found."
+            "Enter a dictionary containing a 'credits' key."
+        )
         raise KeyError(msg)
 
 
-def loading(set_time=0.030, bar=False, header='[Loading]', foreground=''):
+def loading(set_time=0.030, bar=False, header="[Loading]", foreground=""):
     """Function will show animated logging in percentage and bar style.
 
     >>> from snakypy.console import loading
@@ -431,22 +456,22 @@ def loading(set_time=0.030, bar=False, header='[Loading]', foreground=''):
                 time.sleep(set_time)  # 5 seconds
                 width = (i + 1) / 4
                 bar = f"[{'#' * int(width)}{' ' * (25 - int(width))}]"
-                sys.stdout.write(u"\u001b[1000D" + bar)
+                sys.stdout.write("\u001b[1000D" + bar)
                 sys.stdout.flush()
             print()
             return
         for i in range(0, 100):
             time.sleep(set_time)
-            sys.stdout.write(u"\u001b[1000D")
+            sys.stdout.write("\u001b[1000D")
             sys.stdout.flush()
             # time.sleep(0.1)
-            sys.stdout.write(f'{str(i + 1)}%')
+            sys.stdout.write(f"{str(i + 1)}%")
             sys.stdout.flush()
         print()
         return
     except KeyboardInterrupt:
-        printer('\nCanceled by user.', foreground=FG.WARNING)
+        printer("\nCanceled by user.", foreground=FG.WARNING)
         return
 
 
-__all__ = ['pick', 'entry', 'printer', 'billboard', 'cmd', 'credence', 'loading']
+__all__ = ["pick", "entry", "printer", "billboard", "cmd", "credence", "loading"]
