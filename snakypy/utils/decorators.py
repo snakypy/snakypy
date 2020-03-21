@@ -11,14 +11,17 @@ def denying_os(os_name):
                             Windows = nt
                             Linux/Mac OS = posix
     """
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-        if os.name == os_name:
-            msg = f"This software is not compatible with this ({os_name}) operating system."
-            raise Exception(msg)
-        return func(*args, **kwargs)
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            if os.name == os_name:
+                msg = f"This software is not compatible with this ({os_name}) operating system."
+                raise Exception(msg)
+            return func(*args, **kwargs)
 
-    return wrapper
+        return wrapper
+
+    return decorator
 
 
 def only_for_linux(func):
