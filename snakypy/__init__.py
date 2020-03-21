@@ -5,6 +5,7 @@ import snakypy.utils
 import snakypy.console
 import snakypy.ansi
 import snakypy.calc
+from snakypy.utils import os
 from snakypy.utils import catch
 from snakypy.utils import stiff
 from snakypy.utils import decorators
@@ -18,4 +19,4 @@ __author__ = {
     'website': 'https://snakypy.github.io',
     'github': 'https://github.com/snakypy'
 }
-__version__ = '0.2.1'
+__version__ = '0.3.1'

@@ -12,11 +12,12 @@ def use_unix_system(func):
     def wrapper(*args, **kwargs):
         # Linux: startswith('linux')
         # OS X: startswith('darwin')
-        # Windows: startswith('win')
-        if platform.startswith('win'):
-            msg = 'Invalid operating system "Windows". ' \
+        # Windows 64: startswith('win')
+        # Windows 32: startswith('win32')
+        if not platform.startswith('linux'):
+            msg = 'Invalid operating system. ' \
                   f'This function "{func.__name__}" is only compatible with ' \
-                  'unix-based systems.'
+                  'Linux systems.'
             raise NotSupportWindows(msg)
         return func(*args, **kwargs)
     return wrapper

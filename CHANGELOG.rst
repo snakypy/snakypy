@@ -20,3 +20,11 @@ Changelog
 * Adding a new module (path) for creating single and multiple directories receiving a tuple.
 * Correcting a bug in the pick module, it forcedly returned a lowercase text.
 Now the developer has the option to return lowercase or not with the "lowercase" parameter.
+
+
+0.3.1 (2020-03-21)
+------------------
+
+* Adding function to clean directory with empty folders in the "utils.os" module
+* Correcting error in the "create" function of the "path" module.
+* Condition correction in the "use_unix_system" decorator.
