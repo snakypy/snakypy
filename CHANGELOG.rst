@@ -28,7 +28,20 @@ Changelog
 * Correcting error in the "create" function of the "path" module.
 * Condition correction in the "use_unix_system" decorator.
 
-0.3.2 (2020-03-22)
+0.3.2 (2020-03-21)
 ------------------
 
 * Correcting some errors
+
+
+0.3.3 (2020-03-22)
+------------------
+
+* Correcting some errors
+
+
+0.3.4 (2020-03-22)
+------------------
+
+* The "credence" function has been added with a named parameter to manipulate the position of the credits from left to right.
+* The "billboard" function has been added with a parameter named to manipulate the auto, center, and right position.
