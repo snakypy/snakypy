@@ -261,7 +261,7 @@ def billboard(text, foreground="", background="", ret_text=False, justify="auto"
         **ret_text {bool}** -- Receives a Boolean value. If the value is True, it will only \
                                return the text. If the value is False, it will resume printing.
 
-        **justify {str}** -- Justify the position of the text: auto | center | right.
+        **justify {str}** -- Justify the position of the text: auto | center | right. \
                              (default: 'auto')
 
     Returns:
@@ -391,7 +391,7 @@ def credence(app_name, app_version, app_url, data: dict, foreground="", column: 
                             color of the text. This object will be text with ansi code. \
                             (default: '')
 
-        **column {int} -- Justify the position of the credits through the columns
+        **column {int}** -- Justify the position of the credits through the columns \
                           using an integer. (default: 80)
     """
 
