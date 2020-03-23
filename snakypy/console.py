@@ -235,7 +235,7 @@ def pick(
         raise Exception("An unexpected error occurs when using pick")
 
 
-def billboard(text, foreground="", background="", ret_text=False):
+def billboard(text, foreground="", background="", ret_text=False, justify="auto"):
     """
     Creates a Billboard in the terminal.
 
@@ -261,13 +261,16 @@ def billboard(text, foreground="", background="", ret_text=False):
         **ret_text {bool}** -- Receives a Boolean value. If the value is True, it will only \
                                return the text. If the value is False, it will resume printing.
 
+        **justify {str}** -- Justify the position of the text: auto | center | right.
+                             (default: 'auto')
+
     Returns:
         **[str]** -- The text informed in billboard form.
     """
     import pyfiglet
     import snakypy
 
-    banner = pyfiglet.figlet_format(text)
+    banner = pyfiglet.figlet_format(text, justify=justify)
     if ret_text:
         return banner
     return snakypy.printer(banner, foreground=foreground, background=background)
@@ -326,7 +329,7 @@ def cmd(command, *args, shell=True, universal_newlines=True, ret=False, verbose=
         return r
 
 
-def credence(app_name, app_version, app_url, data: dict, foreground=""):
+def credence(app_name, app_version, app_url, data: dict, foreground="", column: int = 80):
     """
     Print project development credits.
 
@@ -387,6 +390,9 @@ def credence(app_name, app_version, app_url, data: dict, foreground=""):
                             an object of class "snakypy.ansi.FG" for the foreground \
                             color of the text. This object will be text with ansi code. \
                             (default: '')
+
+        **column {int} -- Justify the position of the credits through the columns
+                          using an integer. (default: 80)
     """
 
     from datetime import date
@@ -400,24 +406,24 @@ def credence(app_name, app_version, app_url, data: dict, foreground=""):
             )
             raise Exception(msg)
 
-        printer(f'{57 * "-"}'.center(75), foreground=foreground)
-        printer(f"{app_name} - Version {app_version}".center(70), foreground=foreground)
-        printer(f'{57 * "-"}\n'.center(75), foreground=foreground)
-        printer(f"Credence:\n".center(70), foreground=foreground)
+        printer(f'{57 * "-"}'.center(column), foreground=foreground)
+        printer(f"{app_name} - Version {app_version}".center(column), foreground=foreground)
+        printer(f'{57 * "-"}\n'.center(column), foreground=foreground)
+        printer(f"Credence:\n".center(column), foreground=foreground)
         for item in data["credence"]:
             for key, value in item.items():
                 printer(
-                    f'{key.title().replace("_", " ")}: {value}'.center(70),
+                    f'{key.title().replace("_", " ")}: {value}'.center(column),
                     foreground=foreground,
                 )
             print()
-        printer(f'{57 * "-"}'.center(75), foreground=foreground)
+        printer(f'{57 * "-"}'.center(column), foreground=foreground)
         printer(
-            f"{app_name} © {date.today().year} - All Right Reserved.".center(70),
+            f"{app_name} © {date.today().year} - All Right Reserved.".center(column),
             foreground=foreground,
         )
-        printer(f"Home: {app_url}".center(70), foreground=foreground)
-        printer(f'{57 * "-"}'.center(75), foreground=foreground)
+        printer(f"Home: {app_url}".center(column), foreground=foreground)
+        printer(f'{57 * "-"}'.center(column), foreground=foreground)
     except KeyError:
         msg = (
             "The 'credence' key was not found."
