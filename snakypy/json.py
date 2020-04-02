@@ -23,6 +23,8 @@ def read(file_path):
         return data
     except FileNotFoundError as err:
         raise FileNotFoundError(f">>> File not found {err}")
+    except json.decoder.JSONDecodeError as err_j:
+        raise Exception(f">>> Incorrect Json file structure: {file_path}")
     except Exception:
         raise Exception(f">>> There was an error reading the file: {file_path}")
 
