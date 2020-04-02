@@ -226,7 +226,7 @@ def pick(
     try:
         while True:
             option = pick_options(
-                title, options, answer=answer, index=index, colorful=colorful
+                title, options, answer=answer, index=index, colorful=colorful, lowercase=lowercase
             )
             if option or option is None:
                 break
