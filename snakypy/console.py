@@ -123,7 +123,8 @@ def entry(text, *, foreground="", background="", sgr="", jump_line="\n> "):
 
 
 def pick_options(
-    title, options, answer, *, colorful=False, index=False, lowercase=False
+    title, options, answer, *, colorful=False, index=False, lowercase=False,
+    ctrl_c_message=False
 ):
     if not colorful:
         FG.QUESTION = ""
@@ -132,8 +133,8 @@ def pick_options(
         FG.CYAN = ""
         FG.ERROR = ""
         FG.WARNING = ""
-
-    printer(title, "(Ctrl+C to Cancel)", foreground=FG.QUESTION)
+    ctrl_c = "(Ctrl+C to Cancel)" if ctrl_c_message else ""
+    printer(title, ctrl_c, foreground=FG.QUESTION)
     count = 1
     for option in options:
         print(f"{FG.GREEN}[{count}] {FG.MAGENTA}{option}{NONE}")
@@ -164,6 +165,7 @@ def pick(
     index=False,
     colorful=False,
     lowercase=False,
+    ctrl_c_message=False,
 ):
     """Function that creates a menu of options in the terminal.
 
@@ -226,7 +228,8 @@ def pick(
     try:
         while True:
             option = pick_options(
-                title, options, answer=answer, index=index, colorful=colorful, lowercase=lowercase
+                title, options, answer=answer, index=index, colorful=colorful,
+                lowercase=lowercase, ctrl_c_message=ctrl_c_message
             )
             if option or option is None:
                 break
