@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "snakypy"
-version = "0.3.5"
+version = "0.3.6"
 description = "Snakypy is a package that contains code ready to assist in the development of packages/applications so as not to replicate the code."
 authors = ["William C. Canin <https://williamcanin.github.io>"]
 license = "MIT"

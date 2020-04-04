@@ -1,17 +1,13 @@
-import snakypy.file
-import snakypy.path
-import snakypy.json
-import snakypy.utils
-import snakypy.console
 import snakypy.ansi
 import snakypy.calc
-from snakypy.utils import os
-from snakypy.utils import catch
-from snakypy.utils import stiff
-from snakypy.utils import decorators
-from snakypy.ansi import FG, BG, SGR
-from snakypy.console import printer, entry, pick
-
+import snakypy.console
+import snakypy.file
+import snakypy.json
+import snakypy.path
+import snakypy.utils
+from snakypy.ansi import BG, FG, SGR
+from snakypy.console import entry, pick, printer
+from snakypy.utils import catch, decorators, os, stiff
 
 __author__ = {
     "name": "Snakypy Org",
@@ -19,4 +15,4 @@ __author__ = {
     "website": "https://snakypy.github.io",
     "github": "https://github.com/snakypy",
 }
-__version__ = "0.3.5"
+__version__ = "0.3.6"
