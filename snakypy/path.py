@@ -39,6 +39,6 @@ def create(*args, multidir=()):
                 path = Path(directory)
                 path.mkdir(parents=True, exist_ok=True)
     except TypeError:
-        raise TypeError(f">>> You should receive a tuple.")
+        raise TypeError(">>> You should receive a tuple.")
     except Exception:
         raise Exception(f">>> There was an error creating directories: {multidir}")

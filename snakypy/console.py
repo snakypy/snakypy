@@ -412,7 +412,7 @@ def credence(app_name, app_version, app_url, data: dict, foreground="", column: 
         printer(f'{57 * "-"}'.center(column), foreground=foreground)
         printer(f"{app_name} - Version {app_version}".center(column), foreground=foreground)
         printer(f'{57 * "-"}\n'.center(column), foreground=foreground)
-        printer(f"Credence:\n".center(column), foreground=foreground)
+        printer("Credence:\n".center(column), foreground=foreground)
         for item in data["credence"]:
             for key, value in item.items():
                 printer(
