@@ -1,7 +1,7 @@
 twine==3.1.1
 wheel==0.34.2
 flake8==3.8.2
-tox==3.15.2
+tox==3.23.0
 sphinx==3.1.1
 sphinx-rtd-theme==0.5.0
 recommonmark==0.6.0
